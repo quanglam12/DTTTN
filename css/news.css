@@ -1,0 +1,108 @@
+.list_arrow_breakumb {
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.list_arrow_breakumb ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.list_arrow_breakumb li {
+    display: flex;
+    align-items: center;
+    color: #555;
+}
+
+.list_arrow_breakumb li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out;
+}
+
+.list_arrow_breakumb li a:hover {
+    color: #ff6600;
+    text-decoration: underline;
+}
+
+.list_arrow_breakumb li span {
+    margin: 0 8px;
+    color: #999;
+    font-weight: bold;
+}
+
+.list_arrow_breakumb li.active a {
+    color: #0044cc;
+    font-weight: bold;
+    cursor: default;
+    pointer-events: none;
+}
+
+.list_arrow_breakumb .home::before {
+    content: "\1F3E0";
+    margin-right: 5px;
+    color: #000000;
+    font-size: 16px;
+}
+
+.new-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #0044cc;
+}
+
+.new-content {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+}
+.detail-content p {
+    margin-top: 0.3rem;
+    margin-bottom: 0.6rem;
+    line-height: 2rem !important;
+}
+.new-content .date, 
+.new-content .author {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.new-content .author {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+.detail-content {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.7;
+    text-align: justify;
+    margin-top: 10px;
+}
+@media (max-width: 768px) {
+    .list_arrow_breakumb ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .list_arrow_breakumb li span {
+        display: none;
+    }
+}

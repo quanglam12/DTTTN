@@ -1,0 +1,132 @@
+.tab-container {
+    margin-top: 1.5rem;
+}
+
+.custom-tabs {
+    display: flex;
+}
+
+.custom-tabs button {
+    flex: 1;
+    padding: 10px;
+    background: #f1f1f1;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.custom-tabs button.active {
+    background: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+.tab-content.active {
+    display: flex;
+}
+
+.tab-left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tab-left div {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-left img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.tab-left div p {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.tab-right {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tab-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tab-right li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-right a {
+    text-decoration: none;
+    color: #0044cc;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.tab-right a:hover {
+   text-decoration: underline;
+}
+
+.other-news {
+    margin-top: 1rem;
+    font-size: 1rem;
+color: #666 !important;
+    font-weight: normal !important;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .tab-content {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tab-left div {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .tab-left img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-tabs {
+        flex-direction: column;
+    }
+
+    .custom-tabs button {
+        text-align: center;
+    }
+}
