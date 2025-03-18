@@ -262,6 +262,53 @@ body {
     transition: max-height 0.8s ease-in-out, opacity 0.5s ease-in-out;
 }
 
+.expand_wrapper {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expand_option {
+    background: #fff500;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 123;
+}
+
+.expand_dropdown {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;
+    min-width: 120px;
+    z-index: 124;
+}
+
+.expand_dropdown.show {
+    display: block;
+}
+
+.expand_dropdown a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.8rem;
+    transition: background 0.3s;
+}
+
+.expand_dropdown a:hover {
+    background: #f0f0f0;
+}
+
 .main-container h2 {
     color: #333;
 }
@@ -313,6 +360,7 @@ body {
 .events {
     background: #f9f9f9;
     padding: 20px;
+    padding: 0.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -345,6 +393,8 @@ body {
 .events li {
     margin: 8px 0;
     padding: 8px;
+    margin: 0.3rem 0;
+    padding: 0.2rem;
     transition: 0.3s;
     border-radius: 4px;
 }
@@ -534,6 +584,42 @@ body {
     background-color: #fdfdfd;
     border: 1px solid #ddd;
     border-radius: 8px;
+}
+
+#footer .btn-desktop {
+    right: -111px;
+    bottom: 36%;
+}
+
+.btn-desktop {
+    position: fixed;
+    bottom: 40%;
+    right: -107px;
+    -webkit-transform: rotate(270deg);
+    transform: rotate(270deg);
+    z-index: 9999;
+}
+
+#footer .btn-desktop a {
+    margin-right: 2px;
+}
+
+.btn-desktop a {
+    -webkit-animation: glowing 1500ms infinite;
+    -moz-animation: glowing 1500ms infinite;
+    -o-animation: glowing 1500ms infinite;
+    animation: glowing 1500ms infinite;
+}
+
+.btn-desktop a {
+    background: #f9aa28;
+    padding: 7px 20px 9px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #fff;
 }
 
 .bottom-content {

@@ -27,10 +27,16 @@
     padding: 15px;
     border: 1px solid #ddd;
     background: #fff;
+    
 }
 
 .tab-content.active {
     display: flex;
+}
+
+.tab-content a:hover {
+    text-decoration: underline;
+    color: #0044cc;
 }
 
 .tab-left {
@@ -55,6 +61,10 @@
     height: 100px;
     object-fit: cover;
     border-radius: 5px;
+    width: 100px;
+    height: 100%;
+    border: #666 solid 1px;
+    margin-right: 1rem;
 }
 
 .tab-left div p {
@@ -117,6 +127,7 @@ color: #666 !important;
 
     .tab-left img {
         width: 100%;
+        max-width: 150px;
         height: auto;
     }
 }
