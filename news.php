@@ -141,7 +141,8 @@ $data = fetchNews($conn, $config);
                                     <li><a href="./updating.php">Thông báo</a></li>
                                     <li><a href="./updating.php">Khen thưởng-Kỷ luật</a></li>
                                     <li><a href="./updating.php">Kiện toàn nhân sự</a></li>
-                                    <li><a href="./updating.php">Quy chế đánh giá đoàn viên, chi đoàn, liên chi đoàn</a></li>
+                                    <li><a href="./updating.php">Quy chế đánh giá đoàn viên, chi đoàn, liên chi đoàn</a>
+                                    </li>
                                 </ul>
                             <li class="dropdown">
                                 <a>Công tác Đảng</a>
@@ -223,33 +224,33 @@ $data = fetchNews($conn, $config);
                             <ul>
                                 <li><a href="http://localhost/" id="homepage-url" class="home">Trang Chủ</a></li>
                                 <li><span>/</span> <?php
-                                    switch ($row['type']) {
-                                        case '1':
-                                           echo "<a href='../general.php?type=1'>Tin tức chung</a>";
-                                            break;
-                                        case '2':
-                                            echo "<a href='../general.php?type=2'>Thông báo</a>";
-                                            break;
-                                        case '3':
-                                            echo "<a href='../general.php?type=3'>Sự kiện</a>";
-                                            break;
-                                        case '4':
-                                           echo "<a href='../general.php?type=4'>Tin nổi bật</a>";
-                                            break;
-                                        case '5':
-                                            echo "<a href='../general.php?type=5'>Lịch tuần</a>";
-                                            break;
-                                        case '6':
-                                            echo "<a href='../general.php?type=6'>Thi đua</a>";
-                                            break;
-                                        case '7':
-                                            echo "<a href='../general.php?type=7'>Đoàn viên</a>";
-                                            break;
-                                        default:
-                                            echo "<a href='../general.php?type=1'>Tin tức chung</a>";
-                                            break;
-                                    }
-                                    ?></li>
+                                switch ($row['type']) {
+                                    case '1':
+                                        echo "<a href='../general.php?type=1'>Tin tức chung</a>";
+                                        break;
+                                    case '2':
+                                        echo "<a href='../general.php?type=2'>Thông báo</a>";
+                                        break;
+                                    case '3':
+                                        echo "<a href='../general.php?type=3'>Sự kiện</a>";
+                                        break;
+                                    case '4':
+                                        echo "<a href='../general.php?type=4'>Tin nổi bật</a>";
+                                        break;
+                                    case '5':
+                                        echo "<a href='../general.php?type=5'>Lịch tuần</a>";
+                                        break;
+                                    case '6':
+                                        echo "<a href='../general.php?type=6'>Thi đua</a>";
+                                        break;
+                                    case '7':
+                                        echo "<a href='../general.php?type=7'>Đoàn viên</a>";
+                                        break;
+                                    default:
+                                        echo "<a href='../general.php?type=1'>Tin tức chung</a>";
+                                        break;
+                                }
+                                ?></li>
                                 <li class="active"><span>/</span>
                                     <a>
                                         <?php
@@ -378,7 +379,7 @@ $data = fetchNews($conn, $config);
                     </div>
                     <div class="right-content">
                         <div>
-                            Designed and Developed by
+                            Designed and Developed by <a id="DevName">Quang Lâm</a>
                         </div>
                     </div>
                 </div>

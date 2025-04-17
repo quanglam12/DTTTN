@@ -336,7 +336,7 @@ $data = fetchNews($conn, $config);
                                     attaches: {
                                         class: AttachesTool,
                                         config: {
-                                            endpoint: './upload_attaches.php', 
+                                            endpoint: './upload_attaches.php',
                                             buttonText: 'Tải tệp lên',
                                             errorMessage: 'Tải tệp thất bại',
                                             field: 'file',
@@ -489,7 +489,7 @@ $data = fetchNews($conn, $config);
                     </div>
                     <div class="right-content">
                         <div>
-                            Designed and Developed by
+                            Designed and Developed by <a id="DevName">Quang Lâm</a>
                         </div>
                     </div>
                 </div>

@@ -592,7 +592,7 @@ $data = fetchNews($conn, $config);
                     </div>
                     <div class="right-content">
                         <div>
-                            Designed and Developed by
+                            Designed and Developed by <a id="DevName">Quang Lâm</a>
                         </div>
                     </div>
                 </div>

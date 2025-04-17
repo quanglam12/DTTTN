@@ -220,7 +220,7 @@ $data = fetchNews($conn, $config);
                         <div class="list_arrow_breakumb">
                             <ul>
                                 <li><a href="http://localhost/" id="homepage-url" class="home">Trang Chủ</a></li>
-                                
+
                             </ul>
 
                         </div>
@@ -228,7 +228,7 @@ $data = fetchNews($conn, $config);
                             <p>Tính năng đang cập nhật</p>
                         </div>
                         <div class="new-content">
-                         
+
                             <div class="detail-content">
                                 <div>
                                     Tính năng đang cập nhật
@@ -316,7 +316,7 @@ $data = fetchNews($conn, $config);
                     </div>
                     <div class="right-content">
                         <div>
-                            Designed and Developed by
+                            Designed and Developed by <a id="DevName">Quang Lâm</a>
                         </div>
                     </div>
                 </div>

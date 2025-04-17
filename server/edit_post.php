@@ -191,7 +191,8 @@ $data = fetchNews($conn, $config);
                                     <li><a href="../updating.php">Thông báo</a></li>
                                     <li><a href="../updating.php">Khen thưởng-Kỷ luật</a></li>
                                     <li><a href="../updating.php">Kiện toàn nhân sự</a></li>
-                                    <li><a href="../updating.php">Quy chế đánh giá đoàn viên, chi đoàn, liên chi đoàn</a></li>
+                                    <li><a href="../updating.php">Quy chế đánh giá đoàn viên, chi đoàn, liên chi
+                                            đoàn</a></li>
                                 </ul>
                             <li class="dropdown">
                                 <a>Công tác Đảng</a>
@@ -376,7 +377,7 @@ $data = fetchNews($conn, $config);
                                     attaches: {
                                         class: AttachesTool,
                                         config: {
-                                            endpoint: './upload.php', 
+                                            endpoint: './upload.php',
                                             buttonText: 'Tải tệp lên',
                                             errorMessage: 'Tải tệp thất bại',
                                             field: 'file',
@@ -503,7 +504,7 @@ $data = fetchNews($conn, $config);
                 </div>
                 <div class="right-content">
                     <div>
-                        Designed and Developed by
+                        Designed and Developed by <a id="DevName">Quang Lâm</a>
                     </div>
                 </div>
             </div>
