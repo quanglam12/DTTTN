@@ -1,5 +1,5 @@
 <?php
-require "./db_connect.php";
+require "../config/db_connect.php";
 $type_id = filter_var($_GET['type'] ?? 1, FILTER_VALIDATE_INT) ?: 1;
 $posts_per_page = 12;
 

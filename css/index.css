@@ -272,7 +272,7 @@ body {
 .expand_option {
     background: #fff500;
     border: none;
-    font-size: 1.2rem;
+    font-size: 2rem;
     cursor: pointer;
     position: absolute;
     top: 5px;
@@ -301,7 +301,7 @@ body {
     padding: 8px 12px;
     text-decoration: none;
     color: #333;
-    font-size: 0.8rem;
+    font-size: 1.3rem;
     transition: background 0.3s;
 }
 

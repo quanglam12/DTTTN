@@ -1,3 +1,17 @@
+const fileIcon = {
+    'pdf': '../img/icons/pdf.png',
+    'doc': '../img/icons/doc.png',
+    'docx': '../img/icons/doc.png',
+    'png': '../img/icons/image.png',
+    'jpg': '../img/icons/image.png',
+    'ppt': '../img/icons/powerpoint.png',
+    'pptx': '../img/icons/powerpoint.png',
+    'xls': '../img/icons/excel.png',
+    'xlsx': '../img/icons/excel.png',
+    'mp4':'../img/icons/film.png',
+
+};
+
 function renderContent(data) {
     const contentDiv = document.getElementById('chitietbaiviet');
 
@@ -32,6 +46,28 @@ function renderContent(data) {
                 break;
             case 'delimiter':
                 htmlElement = `<div class="delimiter">* * *</div>`;
+                break;
+            case 'attaches':
+                const fileSize = block.data.file.size;
+                const sizeFormatted = fileSize > 1024 * 1024
+                    ? (fileSize / (1024 * 1024)).toFixed(2) + ' MB'
+                    : (fileSize / 1024).toFixed(2) + ' KB';
+
+                const safeExtension = block.data.file.extension.toLowerCase().replace(/[^a-z0-9]/g, '');
+                const iconSrc = fileIcon[safeExtension] || '/images/icons/file.png';
+
+                // Tạo HTML cho file đính kèm với icon là hình ảnh
+                htmlElement = `
+                    <div class="attachment">
+                        <a href="${block.data.file.url}" download="${block.data.file.name}" class="attachment-link" title="Bấm để tải về">
+                            <img src="${iconSrc}" alt="${block.data.file.extension} icon" class="file-icon">
+                            <strong>${block.data.title || block.data.file.name}</strong>
+                        </a>
+                        <p class="attachment-info">
+                            (${block.data.file.extension.toUpperCase()}, ${sizeFormatted})
+                        </p>
+                    </div>
+                `;
                 break;
             default:
                 htmlElement = `<p>[Không hỗ trợ hiển thị loại: ${block.type}]</p>`;

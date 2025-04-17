@@ -1,5 +1,5 @@
 <?php
-require "../db_connect.php";
+require "../../config/db_connect.php";
 include "../auto_login.php";
 
 $user = autoLogin($conn);
@@ -51,34 +51,68 @@ $slug = slugify($data['title']);
 $content = $data['content'];
 
 // Thư mục nguồn và đích
-$uploadDir = 'uploads/';
-$savedDir = 'images/';
+$uploadDir = 'uploads/'; // Thư mục chứa cả hình ảnh và file đính kèm
+$imageDir = 'images/';   // Thư mục đích cho hình ảnh
+$fileDir = 'files/';     // Thư mục đích cho file đính kèm
 
-// Trích xuất danh sách file hình ảnh đang sử dụng
+// Tạo thư mục đích nếu chưa tồn tại
+if (!is_dir($imageDir)) {
+    mkdir($imageDir, 0755, true);
+}
+if (!is_dir($fileDir)) {
+    mkdir($fileDir, 0755, true);
+}
+// Trích xuất danh sách file hình ảnh và file đính kèm đang sử dụng
 $usedImages = [];
+$usedFiles = [];
 foreach ($content['blocks'] as $block) {
+    // Xử lý khối image
     if ($block['type'] === 'image' && isset($block['data']['file']['url'])) {
         $url = $block['data']['file']['url'];
         $fileName = basename(parse_url($url, PHP_URL_PATH));
         $usedImages[] = $fileName;
     }
+    // Xử lý khối attaches
+    if ($block['type'] === 'attaches' && isset($block['data']['file']['url'])) {
+        $url = $block['data']['file']['url'];
+        $fileName = basename(parse_url($url, PHP_URL_PATH));
+        $usedFiles[] = $fileName;
+    }
 }
 
-// Lấy danh sách file trong thư mục uploads
-$existingFiles = array_diff(scandir($uploadDir), ['.', '..']);
-$targetNumber = $user['user_id']; // Số cần lọc
+// Lấy danh sách file trong thư mục uploads (bao gồm cả uploads/files/)
+$existingFiles = array_diff(scandir($uploadDir. 'images/'), ['.', '..']);
+$existingAttachFiles = array_diff(scandir($uploadDir . 'files/'), ['.', '..']);
+$targetNumber = $user['user_id'] ?? 'default'; // Số cần lọc (user_id)
 
+// Lọc các file thuộc về user_id
 $filteredFiles = array_filter($existingFiles, function ($file) use ($targetNumber) {
     if (preg_match('/^(\d+)-/', $file, $matches)) {
         return $matches[1] === $targetNumber;
     }
     return false;
 });
+$filteredAttachFiles = array_filter($existingAttachFiles, function ($file) use ($targetNumber) {
+    if (preg_match('/^(\d+)-/', $file, $matches)) {
+        return $matches[1] === $targetNumber;
+    }
+    return false;
+});
 
-// Di chuyển file đang sử dụng sang thư mục saved_images
+// Di chuyển file hình ảnh đang sử dụng sang thư mục images
 foreach ($usedImages as $fileName) {
-    $sourcePath = $uploadDir . $fileName;
-    $destPath = $savedDir . $fileName;
+    $sourcePath = $uploadDir . 'images/' . $fileName;
+    $destPath = $imageDir . $fileName;
+
+    if (file_exists($sourcePath)) {
+        rename($sourcePath, $destPath); // Di chuyển file
+    }
+}
+
+// Di chuyển file đính kèm đang sử dụng sang thư mục files
+foreach ($usedFiles as $fileName) {
+    $sourcePath = $uploadDir . 'files/' . $fileName;
+    $destPath = $fileDir . $fileName;
 
     if (file_exists($sourcePath)) {
         rename($sourcePath, $destPath); // Di chuyển file
@@ -88,22 +122,38 @@ foreach ($usedImages as $fileName) {
 // Xóa các file không còn sử dụng trong uploads
 foreach ($filteredFiles as $file) {
     if (!in_array($file, $usedImages)) {
-        $filePath = $uploadDir . $file;
+        $filePath = $uploadDir . 'images/' . $file;
         if (file_exists($filePath)) {
             unlink($filePath); // Xóa file
         }
     }
 }
 
-$urlImg = null;
+// Xóa các file không còn sử dụng trong uploads/files
+foreach ($filteredAttachFiles as $file) {
+    if (!in_array($file, $usedFiles)) {
+        $filePath = $uploadDir . 'files/' . $file;
+        if (file_exists($filePath)) {
+            unlink($filePath); // Xóa file
+        }
+    }
+}
+
 // Cập nhật URL trong dữ liệu
+$urlImg = null;
 foreach ($content['blocks'] as &$block) {
+    // Cập nhật URL cho hình ảnh
     if ($block['type'] === 'image' && isset($block['data']['file']['url'])) {
         $fileName = basename($block['data']['file']['url']);
-        $block['data']['file']['url'] = 'http://localhost/server/' . $savedDir . $fileName;
+        $block['data']['file']['url'] = 'http://localhost/server/' . $imageDir . $fileName;
         if ($urlImg == null) {
             $urlImg = $block['data']['file']['url'];
         }
+    }
+    // Cập nhật URL cho file đính kèm
+    if ($block['type'] === 'attaches' && isset($block['data']['file']['url'])) {
+        $fileName = basename($block['data']['file']['url']);
+        $block['data']['file']['url'] = 'http://localhost/server/' . $fileDir . $fileName;
     }
 }
 if ($urlImg == null) {

@@ -1,5 +1,5 @@
 <?php
-require "db_connect.php";
+require "../config/db_connect.php";
 include "auto_login.php";
 $user = autoLogin($conn);
 

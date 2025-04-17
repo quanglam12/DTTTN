@@ -1,5 +1,5 @@
 <?php
-require "./db_connect.php";
+require "../config/db_connect.php";
 $slug = $_GET['slug'] ?? "";
 $sql = "SELECT posts.content, posts.title, posts.type, posts.create_at ,fullname FROM posts INNER JOIN user_account ON posts.author_id = user_account.user_id
         WHERE posts.slug = ? LIMIT 1";

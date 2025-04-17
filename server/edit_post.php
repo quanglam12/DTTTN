@@ -1,5 +1,5 @@
 <?php
-require "../db_connect.php";
+require "../../config/db_connect.php";
 include "../auto_login.php";
 
 // Kiểm tra quyền truy cập (chỉ Admin)
@@ -103,6 +103,7 @@ $data = fetchNews($conn, $config);
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/attaches@latest"></script>
 </head>
 
 <body>
@@ -120,7 +121,18 @@ $data = fetchNews($conn, $config);
                         <div class="right">
                             <nav>
                                 <a href="https://www.ttn.edu.vn/">ĐH Tây Nguyên</a>
-                                <a href="../updating.php">Đăng nhập</a>
+                                <?php
+                                if ($user == null) {
+                                    echo '<a href="./auth.php">Đăng nhập</a>';
+                                } else {
+                                    echo '<a href="./logout.php">Đăng xuất</a>';
+                                }
+                                ?>
+                                <?php
+                                if ($user != null && $user['role'] == 'Admin') {
+                                    echo '<a href="./edit.php">Quản lí</a>';
+                                }
+                                ?>
                                 <div class="search-box">
                                     <input type="text" placeholder="Search...">
                                     <button>🔍</button>
@@ -360,6 +372,15 @@ $data = fetchNews($conn, $config);
                                     warning: {
                                         class: Warning,
                                         inlineToolbar: true
+                                    },
+                                    attaches: {
+                                        class: AttachesTool,
+                                        config: {
+                                            endpoint: './upload.php', 
+                                            buttonText: 'Tải tệp lên',
+                                            errorMessage: 'Tải tệp thất bại',
+                                            field: 'file',
+                                        }
                                     },
                                     marker: Marker
                                 }

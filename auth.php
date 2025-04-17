@@ -1,5 +1,5 @@
 <?php
-require 'db_connect.php';
+require '../config/db_connect.php';
 
 require 'auto_login.php';
 
@@ -118,18 +118,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
 
 $conn->close();
 ?>
-<script>
-
-    function showLoginForm() {
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('loginForm').style.display = 'block';
-    }
-
-    function showRegisterForm() {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'block';
-    }
-</script>
 </body>
 
 </html>

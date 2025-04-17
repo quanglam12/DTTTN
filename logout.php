@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db_connect.php';
+require '../config/db_connect.php';
 
 if (isset($_COOKIE['token'])) {
     $token = hash('sha256', $_COOKIE['token']);

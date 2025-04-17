@@ -1,5 +1,5 @@
 <?php
-require "../db_connect.php";
+require "../config/db_connect.php";
 include "../auto_login.php";
 
 // Kiểm tra quyền truy cập (chỉ Admin)

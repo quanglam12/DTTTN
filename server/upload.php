@@ -1,17 +1,17 @@
 <?php
-require "../db_connect.php";
+require "../../config/db_connect.php";
 include "../auto_login.php";
 
 $user = autoLogin($conn);
 
 if ($user['role'] != 'Admin'){
-    echo json_encode(['success' => 0, 'message' => 'Khôn có quyền truy cập']);
+    echo json_encode(['success' => 0, 'message' => 'Không có quyền truy cập']);
     exit;
 }
 
 header('Content-Type: application/json');
 
-$uploadDir = 'uploads/';
+$uploadDir = 'uploads/images/';
 if (!file_exists($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
@@ -34,4 +34,5 @@ if (isset($_FILES['image'])) {
 } else {
     echo json_encode(['success' => 0, 'message' => 'Không có file được gửi']);
 }
+
 ?>

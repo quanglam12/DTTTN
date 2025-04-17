@@ -1,5 +1,5 @@
 <?php
-require "../db_connect.php";
+require "../../config/db_connect.php";
 include "../auto_login.php";
 
 $user = autoLogin($conn);
@@ -76,6 +76,7 @@ $data = fetchNews($conn, $config);
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/embed@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/warning@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/marker@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/attaches@latest"></script>
 </head>
 
 <body>
@@ -163,7 +164,8 @@ $data = fetchNews($conn, $config);
                                     <li><a href="../updating.php">Thông báo</a></li>
                                     <li><a href="../updating.php">Khen thưởng-Kỷ luật</a></li>
                                     <li><a href="../updating.php">Kiện toàn nhân sự</a></li>
-                                    <li><a href="../updating.php">Quy chế đánh giá đoàn viên, chi đoàn, liên chi đoàn</a></li>
+                                    <li><a href="../updating.php">Quy chế đánh giá đoàn viên, chi đoàn, liên chi
+                                            đoàn</a></li>
                                 </ul>
                             <li class="dropdown">
                                 <a>Công tác Đảng</a>
@@ -330,6 +332,15 @@ $data = fetchNews($conn, $config);
                                     warning: {
                                         class: Warning,
                                         inlineToolbar: true
+                                    },
+                                    attaches: {
+                                        class: AttachesTool,
+                                        config: {
+                                            endpoint: './upload_attaches.php', 
+                                            buttonText: 'Tải tệp lên',
+                                            errorMessage: 'Tải tệp thất bại',
+                                            field: 'file',
+                                        }
                                     },
                                     marker: Marker
                                 }
