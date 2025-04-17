@@ -1,5 +1,8 @@
 <?php
 require "../config/db_connect.php";
+include "auto_login.php";
+$user = autoLogin($conn);
+
 $slug = $_GET['slug'] ?? "";
 $sql = "SELECT posts.content, posts.title, posts.type, posts.create_at ,fullname FROM posts INNER JOIN user_account ON posts.author_id = user_account.user_id
         WHERE posts.slug = ? LIMIT 1";
@@ -83,6 +86,18 @@ $data = fetchNews($conn, $config);
                         <div class="right">
                             <nav>
                                 <a href="https://www.ttn.edu.vn/">ĐH Tây Nguyên</a>
+                                <?php
+                                if ($user == null) {
+                                    echo '<a href="./auth.php">Đăng nhập</a>';
+                                } else {
+                                    echo '<a href="./logout.php">Đăng xuất</a>';
+                                }
+                                ?>
+                                <?php
+                                if ($user != null && $user['role'] == 'Admin') {
+                                    echo '<a href="./edit.php">Quản lí</a>';
+                                }
+                                ?>
                                 <div class="search-box">
                                     <input type="text" placeholder="Search...">
                                     <button>🔍</button>

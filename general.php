@@ -1,5 +1,8 @@
 <?php
 require "../config/db_connect.php";
+include "auto_login.php";
+$user = autoLogin($conn);
+
 $type_id = filter_var($_GET['type'] ?? 1, FILTER_VALIDATE_INT) ?: 1;
 $posts_per_page = 12;
 
@@ -99,6 +102,18 @@ $data = fetchNews($conn, $config);
                         <div class="right">
                             <nav>
                                 <a href="https://www.ttn.edu.vn/">ĐH Tây Nguyên</a>
+                                <?php
+                                if ($user == null) {
+                                    echo '<a href="./auth.php">Đăng nhập</a>';
+                                } else {
+                                    echo '<a href="./logout.php">Đăng xuất</a>';
+                                }
+                                ?>
+                                <?php
+                                if ($user != null && $user['role'] == 'Admin') {
+                                    echo '<a href="./edit.php">Quản lí</a>';
+                                }
+                                ?>
                                 <div class="search-box">
                                     <input type="text" placeholder="Search...">
                                     <button>🔍</button>
