@@ -1,6 +1,7 @@
 <?php
 require "../config/db_connect.php";
 include "auto_login.php";
+include "settings.php";
 $user = autoLogin($conn);
 
 $type_id = filter_var($_GET['type'] ?? 1, FILTER_VALIDATE_INT) ?: 1;
@@ -253,7 +254,7 @@ $data = fetchNews($conn, $config);
                     <div class="left-column">
                         <div class="list_arrow_breakumb">
                             <ul>
-                                <li><a href="http://localhost/" id="homepage-url" class="home">Trang Chủ</a></li>
+                                <li><a href="/" id="homepage-url" class="home">Trang Chủ</a></li>
                                 <li class="active"><span>/</span><a href=""><?php
                                 $row = $result->fetch_assoc();
 

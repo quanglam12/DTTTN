@@ -1,6 +1,7 @@
 <?php
 require "../../config/db_connect.php";
 include "../auto_login.php";
+include "../settings.php";
 
 $user = autoLogin($conn);
 
@@ -29,7 +30,7 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         echo json_encode([
             'success' => 1,
             'file' => [
-                'url' => 'http://localhost/server/' . $filepath,
+                'url' => $Domain . 'server/' . $filepath,
                 'name' => $file['name'],
                 'size' => $file['size'],
                 'extension' => $extension 

@@ -1,6 +1,7 @@
 <?php
 require "../../config/db_connect.php";
 include "../auto_login.php";
+include "../settings.php";
 
 $user = autoLogin($conn);
 
@@ -27,7 +28,7 @@ if ($url) {
         echo json_encode([
             'success' => 1,
             'file' => [
-                'url' => 'http://localhost/server/' . $filePath
+                'url' => $Domain . 'server/' . $filePath
             ]
         ]);
     } else {

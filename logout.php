@@ -1,6 +1,7 @@
 <?php
 session_start();
 require '../config/db_connect.php';
+include 'settings.php';
 
 if (isset($_COOKIE['token'])) {
     $token = hash('sha256', $_COOKIE['token']);
@@ -17,5 +18,5 @@ if (isset($_COOKIE['token'])) {
 $_SESSION = [];
 session_unset();
 session_destroy();
-header('Location: http://localhost/');
+header('Location: ' . $Domain);
 exit;

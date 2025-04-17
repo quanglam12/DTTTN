@@ -1,6 +1,7 @@
 <?php
 require "../../config/db_connect.php";
 include "../auto_login.php";
+include "../settings.php";
 
 // Kiểm tra quyền truy cập (chỉ Admin)
 $user = autoLogin($conn);
@@ -110,14 +111,14 @@ $urlImg = null;
 foreach ($content['blocks'] as &$block) {
     if ($block['type'] === 'image' && isset($block['data']['file']['url'])) {
         $fileName = basename($block['data']['file']['url']);
-        $block['data']['file']['url'] = 'http://localhost/server/' . $savedDir . $fileName;
+        $block['data']['file']['url'] = $Domain .'server/' . $savedDir . $fileName;
         if ($urlImg === null) {
             $urlImg = $block['data']['file']['url'];
         }
     }
 }
 if ($urlImg === null) {
-    $urlImg = 'http://localhost/server/' . $savedDir . 'default.jpg';
+    $urlImg = $Domain . 'server/' . $savedDir . 'default.jpg';
 }
 
 // Chuẩn bị dữ liệu để cập nhật vào cơ sở dữ liệu

@@ -1,6 +1,7 @@
 <?php
 require "../../config/db_connect.php";
 include "../auto_login.php";
+include "../settings.php";
 
 $user = autoLogin($conn);
 
@@ -145,7 +146,7 @@ foreach ($content['blocks'] as &$block) {
     // Cập nhật URL cho hình ảnh
     if ($block['type'] === 'image' && isset($block['data']['file']['url'])) {
         $fileName = basename($block['data']['file']['url']);
-        $block['data']['file']['url'] = 'http://localhost/server/' . $imageDir . $fileName;
+        $block['data']['file']['url'] = $Domain . 'server/' . $imageDir . $fileName;
         if ($urlImg == null) {
             $urlImg = $block['data']['file']['url'];
         }
@@ -153,11 +154,11 @@ foreach ($content['blocks'] as &$block) {
     // Cập nhật URL cho file đính kèm
     if ($block['type'] === 'attaches' && isset($block['data']['file']['url'])) {
         $fileName = basename($block['data']['file']['url']);
-        $block['data']['file']['url'] = 'http://localhost/server/' . $fileDir . $fileName;
+        $block['data']['file']['url'] = $Domain . 'server/' . $fileDir . $fileName;
     }
 }
 if ($urlImg == null) {
-    $urlImg = 'http://localhost/server/' . $savedDir . 'default.jpg';
+    $urlImg = $Domain . 'server/' . $savedDir . 'default.jpg';
 }
 if (isset($data['status']) && $data['status'] == "Writing") {
     $status = "Writing";

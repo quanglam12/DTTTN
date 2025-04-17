@@ -1,7 +1,7 @@
 <?php
 require '../config/db_connect.php';
-
 require 'auto_login.php';
+include 'settings.php';
 
 $user = autoLogin($conn);
 /*
@@ -11,9 +11,6 @@ if ($user) {
 }
 */
 
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +32,6 @@ if (empty($_SESSION['csrf_token'])) {
     <div class="login-form" id="loginForm">
         <h2>Đăng Nhập</h2>
         <form action="auth.php" method="POST">
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <input type="hidden" name="action" value="login">
             <label for="username">Username hoặc Email:</label>
             <input type="text" id="usernameLogin" name="username" required><br>
@@ -53,9 +49,6 @@ if (empty($_SESSION['csrf_token'])) {
 <?php
 
 if (isset($_POST['action']) && $_POST['action'] == 'login') {
-    if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die("CSRF token không hợp lệ.");
-    }
     $userInput = $_POST['username'];
     $password = $_POST['password'];
     $rememberMe = isset($_POST['remember_me']);
@@ -104,8 +97,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'login') {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['login_time'] = time();
             }
-            unset($_SESSION['csrf_token']);
-            header('Location: http://localhost/');
+            header('Location: ' . $Domain);
         } else {
             $_SESSION['login_attempts']++;
             echo htmlspecialchars("Mật khẩu không chính xác!", ENT_QUOTES, 'UTF-8');
