@@ -13,17 +13,21 @@
     .taskbar .right {
         width: 100%;
         justify-content: center;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.2rem;
     }
     .taskbar .right a {
-        border: #02173f;
+        border:1px solid #02173f;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
     }
     .taskbar nav {
         flex-direction: column;
         gap: 0.5rem;
     }
 
-
+    .search-box {
+        padding: 0;
+    }
     /*Navbar*/
     .navbar-container {
         padding: 0.2rem !important;
