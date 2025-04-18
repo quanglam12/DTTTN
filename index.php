@@ -85,7 +85,7 @@ $data = fetchNews($conn, $config);
     <link rel="stylesheet" href="./css/responsive.css" type="text/css">
     <link rel="stylesheet" href="./css/slider.css" type="text/css">
     <link rel="stylesheet" href="./css/topictab.css" type="text/css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uicons@1.0.0/css/uicons.css">
+    <link href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>

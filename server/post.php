@@ -64,7 +64,7 @@ $data = fetchNews($conn, $config);
     <link rel="stylesheet" href="/css/responsive.css" type="text/css">
     <link rel="stylesheet" href="/css/news.css" type="text/css">
     <link rel="stylesheet" href="/css/editor.css" type="text/css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uicons@1.0.0/css/uicons.css">
+    <link href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
