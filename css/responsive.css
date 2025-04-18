@@ -38,6 +38,7 @@
 
     .navbar .menu {
         max-height: 0;
+        gap:0rem;
         opacity: 0;
         display: flex;
         background-color: #0044cc;
@@ -75,7 +76,7 @@
         position: static;
         max-height: 0;
         opacity: 0;
-        flex-direction: column;
+        padding: 0rem;
     }
 
     .dropdown.active .dropdown-menu {

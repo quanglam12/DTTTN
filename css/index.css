@@ -684,6 +684,7 @@ footer {
 
 .back-to-top {
     position: fixed;
+    z-index: 99999;
     bottom: 20px;
     right: 20px;
     background: #0044cc;
