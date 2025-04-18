@@ -84,6 +84,7 @@ $data = fetchNews($conn, $config);
     <link rel="stylesheet" href="./css/news.css" type="text/css">
     <link rel="stylesheet" href="./css/render.css" type="text/css">
     <link rel="stylesheet" href="./css/general.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uicons@1.0.0/css/uicons.css">
 
     <script src="./js/render.js"></script>
 </head>
@@ -402,7 +403,7 @@ $data = fetchNews($conn, $config);
         </div>
     </section>
     <button id="backToTop" class="back-to-top">
-        ⭱
+    <i class="fi fi-sr-arrow-to-top"></i>
     </button>
     <script src="/js/main.js"></script>
     <script src="/js/topictab.js"></script>

@@ -1,11 +1,8 @@
-@media (max-width: 1024px) {
-    .taskbar {
-        padding: 1rem;
-    }
-}
-
 @media (max-width: 768px) {
 
+    h2 {
+        font-size: 1.2rem;
+    }
     /*Taskbar*/
     .taskbar {
         flex-direction: column;
@@ -18,7 +15,9 @@
         justify-content: center;
         margin-bottom: 0.5rem;
     }
-
+    .taskbar .right a {
+        border: #02173f;
+    }
     .taskbar nav {
         flex-direction: column;
         gap: 0.5rem;
