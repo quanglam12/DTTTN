@@ -3,7 +3,7 @@ require(__DIR__ . '/../config/db_connect.php');
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
-    'secure' => true,
+    'secure' => false,
     'httponly' => true,
     'samesite' => 'Strict'
 ]);
