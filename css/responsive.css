@@ -9,7 +9,9 @@
         text-align: center;
         padding-bottom: 0rem;
     }
-
+    .banner-text {
+        font-size: 1.5rem;
+    }
     .taskbar .left,
     .taskbar .right {
         width: 100%;
