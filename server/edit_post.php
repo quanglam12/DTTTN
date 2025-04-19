@@ -83,6 +83,7 @@ $data = fetchNews($conn, $config);
 <html lang="vi-vn">
 
 <head>
+    <base href="/server/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa bài viết - Đoàn Thanh Niên ĐH Tây Nguyên</title>
     <link href="../logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
@@ -340,10 +341,6 @@ $data = fetchNews($conn, $config);
                                         class: Header,
                                         inlineToolbar: true
                                     },
-                                    list: {
-                                        class: EditorjsList,
-                                        inlineToolbar: true
-                                    },
                                     image: {
                                         class: ImageTool,
                                         config: {
@@ -357,6 +354,19 @@ $data = fetchNews($conn, $config);
                                                 stretch: false
                                             }
                                         }
+                                    },
+                                    attaches: {
+                                        class: AttachesTool,
+                                        config: {
+                                            endpoint: './upload.php',
+                                            buttonText: 'Tải tệp lên',
+                                            errorMessage: 'Tải tệp thất bại',
+                                            field: 'file',
+                                        }
+                                    },
+                                    list: {
+                                        class: EditorjsList,
+                                        inlineToolbar: true
                                     },
                                     quote: {
                                         class: Quote,
@@ -375,15 +385,7 @@ $data = fetchNews($conn, $config);
                                         class: Warning,
                                         inlineToolbar: true
                                     },
-                                    attaches: {
-                                        class: AttachesTool,
-                                        config: {
-                                            endpoint: './upload.php',
-                                            buttonText: 'Tải tệp lên',
-                                            errorMessage: 'Tải tệp thất bại',
-                                            field: 'file',
-                                        }
-                                    },
+
                                     marker: Marker
                                 }
                             });

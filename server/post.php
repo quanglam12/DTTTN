@@ -57,6 +57,7 @@ $data = fetchNews($conn, $config);
 <html lang="vi-vn">
 
 <head>
+    <base href="/server/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đoàn Thanh Niên Trường Đại Học Tây Nguyên</title>
     <link href="../logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
@@ -297,11 +298,7 @@ $data = fetchNews($conn, $config);
                                 tools: {
                                     header: {
                                         class: Header,
-                                        inlineToolbar: true
-                                    },
-                                    list: {
-                                        class: EditorjsList,
-                                        inlineToolbar: true
+                                        inlineToolbar: true,
                                     },
                                     image: {
                                         class: ImageTool,
@@ -316,6 +313,19 @@ $data = fetchNews($conn, $config);
                                                 stretch: false
                                             }
                                         }
+                                    },
+                                    attaches: {
+                                        class: AttachesTool,
+                                        config: {
+                                            endpoint: './upload_attaches.php',
+                                            buttonText: 'Tải tệp lên',
+                                            errorMessage: 'Tải tệp thất bại',
+                                            field: 'file',
+                                        }
+                                    },
+                                    list: {
+                                        class: EditorjsList,
+                                        inlineToolbar: true,
                                     },
                                     quote: {
                                         class: Quote,
@@ -334,15 +344,7 @@ $data = fetchNews($conn, $config);
                                         class: Warning,
                                         inlineToolbar: true
                                     },
-                                    attaches: {
-                                        class: AttachesTool,
-                                        config: {
-                                            endpoint: './upload_attaches.php',
-                                            buttonText: 'Tải tệp lên',
-                                            errorMessage: 'Tải tệp thất bại',
-                                            field: 'file',
-                                        }
-                                    },
+
                                     marker: Marker
                                 }
                             });
@@ -499,7 +501,7 @@ $data = fetchNews($conn, $config);
         </div>
     </section>
     <button id="backToTop" class="back-to-top">
-    <i class="fi fi-sr-arrow-to-top"></i>
+        <i class="fi fi-sr-arrow-to-top"></i>
     </button>
     <script src="/js/main.js"></script>
     <script src="/js/topictab.js"></script>
