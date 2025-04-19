@@ -250,7 +250,7 @@ $data = fetchNews($conn, $config);
             <div class="container">
                 <div class="events">
                     <h2 class="event-title">
-                        <a href="./general.php?type=3">
+                        <a href="./sukien">
                             Sự Kiện
                         </a>
                     </h2>
@@ -258,7 +258,7 @@ $data = fetchNews($conn, $config);
                         <?php
                         foreach ($data['su_kien'] as $p) {
                             $slug = $p['slug'];
-                            echo "<li><a href='./news.php?slug=$slug'>";
+                            echo "<li><a href='./baiviet/$slug'>";
                             echo htmlspecialchars($p['title']);
                             echo "</a></li>";
                         }
@@ -277,34 +277,34 @@ $data = fetchNews($conn, $config);
 
                                     switch ($post['type']) {
                                         case 1:
-                                            echo "<a href='../general.php?type=1'>Tin tức chung</a>";
+                                            echo "<a href='../tintucchung'>Tin tức chung</a>";
                                             break;
                                         case 2:
-                                            echo "<a href='../general.php?type=2'>Thông báo</a>";
+                                            echo "<a href='../thongbao'>Thông báo</a>";
                                             break;
                                         case 3:
-                                            echo "<a href='../general.php?type=3'>Sự kiện</a>";
+                                            echo "<a href='../sukien'>Sự kiện</a>";
                                             break;
                                         case 4:
-                                            echo "<a href='../general.php?type=4'>Tin nổi bật</a>";
+                                            echo "<a href='../tinnoibat'>Tin nổi bật</a>";
                                             break;
                                         case 5:
-                                            echo "<a href='../general.php?type=5'>Lịch tuần</a>";
+                                            echo "<a href='../lichtuan'>Lịch tuần</a>";
                                             break;
                                         case 6:
-                                            echo "<a href='../general.php?type=6'>Thi đua</a>";
+                                            echo "<a href='../thidua'>Thi đua</a>";
                                             break;
                                         case 7:
-                                            echo "<a href='../general.php?type=7'>Đoàn viên</a>";
+                                            echo "<a href='../doanvien'>Đoàn viên</a>";
                                             break;
                                         default:
-                                            echo "<a href='../general.php?type=1'>Tin tức chung</a>";
+                                            echo "<a href='../tintucchung'>Tin tức chung</a>";
                                             break;
                                     }
                                     ?>
                                 </li>
                                 <li class="active"><span>/</span>
-                                    <a href="../updating.php">Chỉnh sửa bài viết</a>
+                                    <a>Chỉnh sửa bài viết</a>
                                 </li>
                             </ul>
                         </div>
@@ -433,14 +433,14 @@ $data = fetchNews($conn, $config);
 
                     <div class="right-column">
                         <div class="notifications">
-                            <a href="./general.php?type=2">
+                            <a href="./thongbao">
                                 <h2>Thông báo</h2>
                             </a>
                             <ul>
                                 <?php
                                 foreach ($data['thong_bao'] as $p) {
                                     $slug = $p['slug'];
-                                    echo "<li><div><a href='./news.php?slug=$slug'>";
+                                    echo "<li><div><a href='./baiviet/$slug'>";
                                     echo htmlspecialchars($p['title']);
                                     echo "</a>";
                                     echo "<p>" . date('d/m/Y', strtotime($p['last_update']));
@@ -451,7 +451,7 @@ $data = fetchNews($conn, $config);
                             </ul>
                         </div>
                         <div class="news">
-                            <a href="./general.php?type=1">
+                            <a href="./tintucchung">
                                 <h2>Tin tức chung</h2>
                             </a>
                             <ul>
@@ -459,7 +459,7 @@ $data = fetchNews($conn, $config);
                                 foreach ($data['tin_tuc_chung'] as $p) {
                                     $img = $p['image'];
                                     $slug = $p['slug'];
-                                    echo "<li><div><a href='./news.php?slug=$slug'>";
+                                    echo "<li><div><a href='./baiviet/$slug'>";
                                     echo "<img src='$img'>";
                                     echo htmlspecialchars($p['title']);
                                     echo "</a>";

@@ -213,7 +213,7 @@ $data = fetchNews($conn, $config);
             <div class="container">
                 <div class="events">
                     <h2 class="event-title">
-                        <a href="./general.php?type=3">
+                        <a href="./sukien">
                             Sự Kiện
                         </a>
                     </h2>
@@ -221,7 +221,7 @@ $data = fetchNews($conn, $config);
                         <?php
                         foreach ($data['su_kien'] as $post) {
                             $slug = $post['slug'];
-                            echo "<li><a href='./news.php?slug=$slug'>";
+                            echo "<li><a href='./baiviet/$slug'>";
                             echo htmlspecialchars($post['title']);
                             echo "</a></li>";
                         }
@@ -258,14 +258,14 @@ $data = fetchNews($conn, $config);
 
                     <div class="right-column">
                         <div class="notifications">
-                            <a href="./general.php?type=2">
+                            <a href="./thongbao">
                                 <h2>Thông báo</h2>
                             </a>
                             <ul>
                                 <?php
                                 foreach ($data['thong_bao'] as $post) {
                                     $slug = $post['slug'];
-                                    echo "<li><div><a href='./news.php?slug=$slug'>";
+                                    echo "<li><div><a href='./baiviet/$slug'>";
                                     echo htmlspecialchars($post['title']);
                                     echo "</a>";
                                     echo "<p>" . date('d/m/Y', strtotime($post['last_update']));
@@ -276,7 +276,7 @@ $data = fetchNews($conn, $config);
                             </ul>
                         </div>
                         <div class="news">
-                            <a href="./general.php?type=1">
+                            <a href="./tintucchung">
                                 <h2>Tin tức chung</h2>
                             </a>
                             <ul>
@@ -284,7 +284,7 @@ $data = fetchNews($conn, $config);
                                 foreach ($data['tin_tuc_chung'] as $post) {
                                     $img = $post['image'];
                                     $slug = $post['slug'];
-                                    echo "<li><div><a href='./news.php?slug=$slug'>";
+                                    echo "<li><div><a href='./baiviet/$slug'>";
                                     echo "<img src='$img'>";
                                     echo htmlspecialchars($post['title']);
                                     echo "</a>";

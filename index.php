@@ -237,13 +237,13 @@ $data = fetchNews($conn, $config);
                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./server/post.php?type=3">Viết bài</a>
+                                            <a href="./sukien">Viết bài</a>
                                         </div>
                                     </div>';
                     }
                     ?>
                     <h2 class="event-title">
-                        <a href="./general.php?type=3">
+                        <a href="./sukien">
                             Sự Kiện
                         </a>
                     </h2>
@@ -251,7 +251,7 @@ $data = fetchNews($conn, $config);
                         <?php
                         foreach ($data['su_kien'] as $post) {
                             $slug = $post['slug'];
-                            echo "<li><a href='./news.php?slug=$slug'>";
+                            echo "<li><a href='./baiviet/$slug'>";
                             echo htmlspecialchars($post['title']);
                             echo "</a></li>";
                         }
@@ -280,7 +280,7 @@ $data = fetchNews($conn, $config);
                                             echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./server/post.php?type=4">Viết bài</a>
+                                            <a href="./vietbai/tinnoibat">Viết bài</a>
                                         </div>
                                     </div>';
                                         }
@@ -290,7 +290,7 @@ $data = fetchNews($conn, $config);
                                         foreach ($data['tin_noi_bat'] as $post) {
                                             $slug = $post['slug'];
                                             $image = $post['image'];
-                                            echo "<a href='./news.php?slug=$slug'>";
+                                            echo "<a href='./baiviet/$slug'>";
                                             if ($first) {
                                                 echo "<img src='$image' class='imgslider active'>";
                                                 $first = false;
@@ -341,7 +341,7 @@ $data = fetchNews($conn, $config);
                                     foreach ($doanvienleft as $post) {
                                         $img = $post['image'];
                                         $slug = $post['slug'];
-                                        echo "<div><a href='./news.php?slug=$slug'>";
+                                        echo "<div><a href='./baiviet/$slug'>";
                                         echo "<img src='$img'>";
                                         echo $post['title'];
                                         echo "</a></div>";
@@ -354,7 +354,7 @@ $data = fetchNews($conn, $config);
                                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./server/post.php?type=7">Viết bài</a>
+                                            <a href="./vietbai/doanvien">Viết bài</a>
                                         </div>
                                     </div>';
                                     }
@@ -364,14 +364,14 @@ $data = fetchNews($conn, $config);
                                         foreach ($doanvienright as $post) {
                                             $img = $post['image'];
                                             $slug = $post['slug'];
-                                            echo "<li><a href='./news.php?slug=$slug'>";
+                                            echo "<li><a href='./baiviet/$slug'>";
                                             echo $post['title'];
                                             echo "</a></li>";
                                         }
                                         ?>
 
                                     </ul>
-                                    <a href="./general.php?type=7" class="other-news">Xem các tin khác</a>
+                                    <a href="./doanvien" class="other-news">Xem các tin khác</a>
                                 </div>
                             </div>
 
@@ -387,7 +387,7 @@ $data = fetchNews($conn, $config);
                                     foreach ($lichtuanleft as $post) {
                                         $img = $post['image'];
                                         $slug = $post['slug'];
-                                        echo "<div><a href='./news.php?slug=$slug'>";
+                                        echo "<div><a href='./baiviet/$slug'>";
                                         echo "<img src='$img'>";
                                         echo $post['title'];
                                         echo "</a></div>";
@@ -400,7 +400,7 @@ $data = fetchNews($conn, $config);
                                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./server/post.php?type=5">Viết bài</a>
+                                            <a href="./vietbai/lichtuan">Viết bài</a>
                                         </div>
                                     </div>';
                                     }
@@ -410,13 +410,13 @@ $data = fetchNews($conn, $config);
                                         foreach ($lichtuanright as $post) {
                                             $img = $post['image'];
                                             $slug = $post['slug'];
-                                            echo "<li><a href='./news.php?slug=$slug'>";
+                                            echo "<li><a href='./baiviet/$slug'>";
                                             echo $post['title'];
                                             echo "</a></li>";
                                         }
                                         ?>
                                     </ul>
-                                    <a href="./general.php?type=5" class="other-news">Xem các tin khác</a>
+                                    <a href="./lichtuan" class="other-news">Xem các tin khác</a>
                                 </div>
                             </div>
 
@@ -432,7 +432,7 @@ $data = fetchNews($conn, $config);
                                     foreach ($thidualeft as $post) {
                                         $img = $post['image'];
                                         $slug = $post['slug'];
-                                        echo "<div><a href='./news.php?slug=$slug'>";
+                                        echo "<div><a href='./baiviet/$slug'>";
                                         echo "<img src='$img'>";
                                         echo $post['title'];
                                         echo "</a></div>";
@@ -445,7 +445,7 @@ $data = fetchNews($conn, $config);
                                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./server/post.php?type=6">Viết bài</a>
+                                            <a href="./vietbai/thidua">Viết bài</a>
                                         </div>
                                     </div>';
                                     }
@@ -455,13 +455,13 @@ $data = fetchNews($conn, $config);
                                         foreach ($thiduaright as $post) {
                                             $img = $post['image'];
                                             $slug = $post['slug'];
-                                            echo "<li><a href='./news.php?slug=$slug'>";
+                                            echo "<li><a href='./baiviet/$slug'>";
                                             echo $post['title'];
                                             echo "</a></li>";
                                         }
                                         ?>
                                     </ul>
-                                    <a href="./general.php?type=6" class="other-news">Xem các tin khác</a>
+                                    <a href="./thidua" class="other-news">Xem các tin khác</a>
                                 </div>
                             </div>
                         </div>
@@ -474,19 +474,19 @@ $data = fetchNews($conn, $config);
                                 echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./server/post.php?type=2">Viết bài</a>
+                                            <a href="./vietbai/thongbao">Viết bài</a>
                                         </div>
                                     </div>';
                             }
                             ?>
-                            <a href="./general.php?type=2">
+                            <a href="./thongbao">
                                 <h2>Thông báo</h2>
                             </a>
                             <ul>
                                 <?php
                                 foreach ($data['thong_bao'] as $post) {
                                     $slug = $post['slug'];
-                                    echo "<li><div><a href='./news.php?slug=$slug'>";
+                                    echo "<li><div><a href='./baiviet/$slug'>";
                                     echo htmlspecialchars($post['title']);
                                     echo "</a>";
                                     echo "<p>" . date('d/m/Y', strtotime($post['last_update']));
@@ -502,12 +502,12 @@ $data = fetchNews($conn, $config);
                                 echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./server/post.php?type=1">Viết bài</a>
+                                            <a href="./vietbai/tintucchung">Viết bài</a>
                                         </div>
                                     </div>';
                             }
                             ?>
-                            <a href="./general.php?type=1">
+                            <a href="./tintucchung">
                                 <h2>Tin tức chung</h2>
                             </a>
                             <ul>
@@ -515,7 +515,7 @@ $data = fetchNews($conn, $config);
                                 foreach ($data['tin_tuc_chung'] as $post) {
                                     $img = $post['image'];
                                     $slug = $post['slug'];
-                                    echo "<li><div><a href='./news.php?slug=$slug'>";
+                                    echo "<li><div><a href='./baiviet/$slug'>";
                                     echo "<img src='$img'>";
                                     echo htmlspecialchars($post['title']);
                                     echo "</a>";
