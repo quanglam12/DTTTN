@@ -25,7 +25,7 @@ if (!$post_id) {
     exit;
 }
 
-// Chuẩn bị và thực hiện truy vấn để lấy thông tin bài viết (bao gồm content để xóa file ảnh)
+// Chuẩn bị và thực hiện truy vấn để lấy thông tin bài viết (bao gồm content để xóa file ảnh và file đính kèm)
 $sql = "SELECT content, image FROM posts WHERE post_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $post_id);
@@ -39,15 +39,23 @@ if ($result->num_rows === 0) {
 
 $post = $result->fetch_assoc();
 
-// Giải mã content để lấy danh sách file ảnh
+// Giải mã content để lấy danh sách file ảnh và file đính kèm
 $content = json_decode($post['content'], true);
 $usedImages = [];
+$usedFiles = [];
 if ($content && isset($content['blocks'])) {
     foreach ($content['blocks'] as $block) {
+        // Xử lý khối image
         if ($block['type'] === 'image' && isset($block['data']['file']['url'])) {
             $url = $block['data']['file']['url'];
             $fileName = basename(parse_url($url, PHP_URL_PATH));
             $usedImages[] = $fileName;
+        }
+        // Xử lý khối attaches
+        if ($block['type'] === 'attaches' && isset($block['data']['file']['url'])) {
+            $url = $block['data']['file']['url'];
+            $fileName = basename(parse_url($url, PHP_URL_PATH));
+            $usedFiles[] = $fileName;
         }
     }
 }
@@ -61,13 +69,31 @@ if ($post['image']) {
 }
 
 // Thư mục chứa ảnh đã lưu
-$savedDir = 'images/';
+$savedDirImages = 'images/';
+// Thư mục chứa file đính kèm đã lưu
+$savedDirFiles = 'files/';
 
 // Xóa các file ảnh liên quan trong thư mục images
 foreach ($usedImages as $fileName) {
-    $filePath = $savedDir . $fileName;
+    $filePath = $savedDirImages . $fileName;
     if (file_exists($filePath)) {
-        unlink($filePath); // Xóa file
+        if (unlink($filePath)) {
+            // Xóa thành công (có thể ghi log nếu cần)
+        } else {
+            // Ghi log lỗi nếu xóa thất bại (tùy chọn)
+        }
+    }
+}
+
+// Xóa các file đính kèm liên quan trong thư mục files
+foreach ($usedFiles as $fileName) {
+    $filePath = $savedDirFiles . $fileName;
+    if (file_exists($filePath)) {
+        if (unlink($filePath)) {
+            // Xóa thành công (có thể ghi log nếu cần)
+        } else {
+            // Ghi log lỗi nếu xóa thất bại (tùy chọn)
+        }
     }
 }
 

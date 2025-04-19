@@ -97,14 +97,14 @@ $data = fetchNews($conn, $config);
                                 <a href="https://www.ttn.edu.vn/">ĐH Tây Nguyên</a>
                                 <?php
                                 if ($user == null) {
-                                    echo '<a href="./auth.php">Đăng nhập</a>';
+                                    echo '<a href="../auth.php">Đăng nhập</a>';
                                 } else {
-                                    echo '<a href="./logout.php">Đăng xuất</a>';
+                                    echo '<a href="../logout.php">Đăng xuất</a>';
                                 }
                                 ?>
                                 <?php
                                 if ($user != null && $user['role'] == 'Admin') {
-                                    echo '<a href="./edit.php">Quản lí</a>';
+                                    echo '<a href="../edit.php">Quản lí</a>';
                                 }
                                 ?>
                                 <div class="search-box">
