@@ -332,6 +332,80 @@ $data = fetchNews($conn, $config);
                             onclick="window.location.href='../general.php?type=<?php echo $post['type']; ?>'">Hủy</button>
 
                         <script>
+                            let isSaved = true;
+                            let tempFiles = [];
+                            let previousBlocks = [];
+                            function addTempFile(url) {
+                                console.log(url);
+                                const match = url.match(/uploads\/.+$/);
+                                console.log("===" + match)
+                                if (!tempFiles.includes(match)) {
+                                    tempFiles.push(match);
+                                    console.log('Added to tempFiles:', match);
+                                }
+                            }
+                            async function checkNewFileBlocks() {
+                                try {
+                                    const outputData = await editor.save();
+                                    const currentBlocks = outputData.blocks;
+
+                                    currentBlocks.forEach((block) => {
+                                        if (
+                                            (block.type === 'image' || block.type === 'attaches') &&
+                                            block.data.file && block.data.file.url
+                                        ) {
+                                            const isNewBlock = !previousBlocks.some(
+                                                (prevBlock) =>
+                                                    prevBlock.type === block.type &&
+                                                    prevBlock.data.file.url === block.data.file.url
+                                            );
+                                            if (isNewBlock) {
+                                                addTempFile(block.data.file.url);
+                                            }
+                                        }
+                                    });
+
+                                    previousBlocks = [...currentBlocks];
+                                } catch (error) {
+                                    console.error('Lỗi khi kiểm tra khối mới:', error);
+                                }
+                            }
+                            function toggleExitWarning(enable) {
+                                if (enable) {
+                                    window.addEventListener('beforeunload', handleBeforeUnload);
+                                } else {
+                                    window.removeEventListener('beforeunload', handleBeforeUnload);
+                                }
+                            }
+
+                            function handleBeforeUnload(event) {
+                                if (isSaved) return;
+                                event.preventDefault();
+                                event.returnValue = '';
+                                return 'Bạn có chắc chắn muốn thoát? Dữ liệu chưa lưu sẽ bị xóa.';
+                            }
+
+                            async function deleteServerData() {
+                                try {
+                                    const response = await fetch('./delete_temp_post.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: JSON.stringify({ files: tempFiles }),
+                                    });
+                                    const result = await response.json();
+                                    if (result.success) {
+                                        console.log('Dữ liệu tạm trên server đã được xóa.');
+                                        tempFiles = [];
+                                    } else {
+                                        console.error('Lỗi khi xóa dữ liệu:', result.message);
+                                    }
+                                } catch (error) {
+                                    console.error('Lỗi khi gửi yêu cầu xóa:', error);
+                                }
+                            }
+
                             // Khởi tạo Editor.js với dữ liệu content đã lấy từ DB
                             const editor = new EditorJS({
                                 holder: 'editorjs',
@@ -386,7 +460,13 @@ $data = fetchNews($conn, $config);
                                         inlineToolbar: true
                                     },
 
-                                    marker: Marker
+                                    marker: Marker,
+                                    onChange: async () => {
+                                    isSaved = false;
+                                    toggleExitWarning(true);
+                                    await checkNewFileBlocks();
+
+                                },
                                 }
                             });
 
@@ -417,6 +497,9 @@ $data = fetchNews($conn, $config);
                                     })
                                         .then(response => response.json())
                                         .then(data => {
+                                            isSaved = true;
+                                            toggleExitWarning(false);
+                                            tempFiles = [];
                                             alert(data.message);
                                             if (data.success) {
                                                 window.location.href = '../general.php?type=' + type;
@@ -429,6 +512,11 @@ $data = fetchNews($conn, $config);
                                 }).catch((error) => {
                                     alert('Lỗi khi lưu nội dung: ' + error);
                                 });
+                            });
+                            window.addEventListener('unload', () => {
+                                if (!isSaved) {
+                                    navigator.sendBeacon('./delete_temp_post.php', JSON.stringify({ files: tempFiles }));
+                                }
                             });
                         </script>
                     </div>
