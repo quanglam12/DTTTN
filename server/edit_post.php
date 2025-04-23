@@ -85,7 +85,7 @@ $data = fetchNews($conn, $config);
 <head>
     <base href="/server/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh sửa bài viết - Đoàn Thanh Niên ĐH Tây Nguyên</title>
+    <title>Chỉnh sửa bài viết - Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên</title>
     <link href="../logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
     <link rel="stylesheet" href="/css/index.css" type="text/css">
     <link rel="stylesheet" href="/css/responsive.css" type="text/css">
@@ -117,12 +117,12 @@ $data = fetchNews($conn, $config);
                         <div class="left">
                             <div class="logo">
                                 <img src="https://placehold.co/50x50" alt="Logo">
-                                Đoàn thanh niên ĐH Tây Nguyên
+                                Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên
                             </div>
                         </div>
                         <div class="right">
                             <nav>
-                                <a href="https://www.ttn.edu.vn/">ĐH Tây Nguyên</a>
+                                <a href="https://www.ttn.edu.vn/">Đại học Tây Nguyên</a>
                                 <?php
                                 if ($user == null) {
                                     echo '<a href="../auth.php">Đăng nhập</a>';
@@ -149,7 +149,7 @@ $data = fetchNews($conn, $config);
             <div class="container">
                 <section class="banner">
                     <img src="../img/B12.jpg" alt="Banner">
-                    <div class="banner-text">Đoàn Thanh Niên ĐHTN</div>
+                    <div class="banner-text">Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên</div>
                 </section>
             </div>
         </div>
@@ -566,7 +566,7 @@ $data = fetchNews($conn, $config);
         <footer>
             <div class="footer-content">
                 <div class="left-content">
-                    <p>Đoàn thanh niên trường ĐH Tây Nguyên</p>
+                    <p>Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên</p>
                     <div>
                         <p>&#128204; Địa chỉ: 567 Lê Duẩn TP. Buôn Ma Thuột - Đăk Lăk</p>
                         <p>&#128383; SĐT: (0262)3825185</p>
