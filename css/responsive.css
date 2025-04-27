@@ -1,4 +1,7 @@
 @media (max-width: 768px) {
+    html{
+        font-size: 62.5%;
+    }
 
     h2 {
         font-size: 1.3rem !important;
@@ -88,7 +91,9 @@
 
 @media (max-width: 480px) {
     html {
-        font-size: 14px;
+        html{
+            font-size: 56.25%;
+        }
     }
 
     .taskbar {
