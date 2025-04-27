@@ -147,7 +147,7 @@ $data = fetchNews($conn, $config);
                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
-                                            <a href="./sukien">Viết bài</a>
+                                            <a href="./vietbai/sukien">Viết bài</a>
                                         </div>
                                     </div>';
                     }

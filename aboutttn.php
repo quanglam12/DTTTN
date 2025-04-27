@@ -10,11 +10,11 @@ $user = autoLogin($conn);
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên</title>
-    <link href="./logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
-    <link rel="stylesheet" href="./css/index.css" type="text/css">
-    <link rel="stylesheet" href="./css/responsive.css" type="text/css">
-    <link rel="stylesheet" href="./css/slider.css" type="text/css">
-    <link rel="stylesheet" href="./css/topictab.css" type="text/css">
+    <link href="/logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/css/responsive.css" type="text/css">
+    <link rel="stylesheet" href="/css/slider.css" type="text/css">
+    <link rel="stylesheet" href="/css/topictab.css" type="text/css">
     <link href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -28,7 +28,7 @@ $user = autoLogin($conn);
                     <div class="taskbar">
                         <div class="left">
                             <div class="logo">
-                                <img src="./logo.ico" alt="Logo">
+                                <img src="/logo.ico" alt="Logo">
                                 <p> Cổng thông tin điện tử</p>
                             </div>
                         </div>
@@ -37,14 +37,14 @@ $user = autoLogin($conn);
                                 <a href="https://www.ttn.edu.vn/">Đại học Tây Nguyên</a>
                                 <?php
                                 if ($user == null) {
-                                    echo '<a href="./auth.php">Đăng nhập</a>';
+                                    echo '<a href="/auth.php">Đăng nhập</a>';
                                 } else {
-                                    echo '<a href="./logout.php">Đăng xuất</a>';
+                                    echo '<a href="/logout.php">Đăng xuất</a>';
                                 }
                                 ?>
                                 <?php
                                 if ($user != null && $user['role'] == 'Admin') {
-                                    echo '<a href="./edit.php">Quản lí</a>';
+                                    echo '<a href="/edit.php">Quản lí</a>';
                                 }
                                 ?>
                                 <div class="search-box">
@@ -60,7 +60,7 @@ $user = autoLogin($conn);
         <div class="main">
             <div class="container">
                 <section class="banner">
-                    <img src="./img/B12.jpg" alt="Banner">
+                    <img src="/img/B12.jpg" alt="Banner">
                     <div class="banner-text">
                         <p>Đoàn TNCS Hồ Chí Minh</p>
                         <p>Trường Đại Học Tây Nguyên</p>
@@ -69,7 +69,7 @@ $user = autoLogin($conn);
             </div>
         </div>
         <div class="main">
-            <?php include('./src/navbar.html'); ?>
+            <?php include('/src/navbar.html'); ?>
         </div>
         <div class="main">
             <div class="container">
@@ -146,6 +146,6 @@ $user = autoLogin($conn);
                 </div>
             </div>
             <footer>
-                <?php include "./src/footer.html"; ?>
+                <?php include "/src/footer.html"; ?>
             </footer>
         </div>

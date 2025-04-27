@@ -69,13 +69,13 @@ $data = fetchNews($conn, $config);
         echo "Xảy ra lỗi";
     }
     ?></title>
-    <link href="./logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
-    <link rel="stylesheet" href="./css/index.css" type="text/css">
-    <link rel="stylesheet" href="./css/responsive.css" type="text/css">
-    <link rel="stylesheet" href="./css/news.css" type="text/css">
-    <link rel="stylesheet" href="./css/render.css" type="text/css">
+    <link href="/logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="/css/index.css" type="text/css">
+    <link rel="stylesheet" href="/css/responsive.css" type="text/css">
+    <link rel="stylesheet" href="/css/news.css" type="text/css">
+    <link rel="stylesheet" href="/css/render.css" type="text/css">
     <link href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" rel="stylesheet">
-    <script src="./js/render.js"></script>
+    <script src="/js/render.js"></script>
 </head>
 
 <body>
@@ -86,7 +86,7 @@ $data = fetchNews($conn, $config);
                     <div class="taskbar">
                         <div class="left">
                             <div class="logo">
-                                <img src="https://placehold.co/50x50" alt="Logo">
+                                <img src="/logo.ico" alt="Logo">
                                 <p>Cổng thông tin điện tử</p>
                             </div>
                         </div>
@@ -95,14 +95,14 @@ $data = fetchNews($conn, $config);
                                 <a href="https://www.ttn.edu.vn/">Đại học Tây Nguyên</a>
                                 <?php
                                 if ($user == null) {
-                                    echo '<a href="./auth.php">Đăng nhập</a>';
+                                    echo '<a href="/auth.php">Đăng nhập</a>';
                                 } else {
-                                    echo '<a href="./logout.php">Đăng xuất</a>';
+                                    echo '<a href="/logout.php">Đăng xuất</a>';
                                 }
                                 ?>
                                 <?php
                                 if ($user != null && $user['role'] == 'Admin') {
-                                    echo '<a href="./edit.php">Quản lí</a>';
+                                    echo '<a href="/edit.php">Quản lí</a>';
                                 }
                                 ?>
                                 <div class="search-box">
@@ -127,7 +127,7 @@ $data = fetchNews($conn, $config);
             </div>
         </div>
         <div class="main">
-            <?php include('./src/navbar.html'); ?>
+            <?php include('/src/navbar.html'); ?>
             <div class="container">
                 <div class="events">
                     <h2 class="event-title">
@@ -139,7 +139,7 @@ $data = fetchNews($conn, $config);
                         <?php
                         foreach ($data['su_kien'] as $post) {
                             $slug = $post['slug'];
-                            echo "<li><a href='./baiviet/$slug'>";
+                            echo "<li><a href='/baiviet/$slug'>";
                             echo htmlspecialchars($post['title']);
                             echo "</a></li>";
                         }
@@ -158,28 +158,28 @@ $data = fetchNews($conn, $config);
                                 <li><span>/</span> <?php
                                 switch ($row['type']) {
                                     case '1':
-                                        echo "<a href='../tintucchung'>Tin tức chung</a>";
+                                        echo "<a href='/tintucchung'>Tin tức chung</a>";
                                         break;
                                     case '2':
-                                        echo "<a href='../thongbao'>Thông báo</a>";
+                                        echo "<a href='/thongbao'>Thông báo</a>";
                                         break;
                                     case '3':
-                                        echo "<a href='../sukien'>Sự kiện</a>";
+                                        echo "<a href='/sukien'>Sự kiện</a>";
                                         break;
                                     case '4':
-                                        echo "<a href='../tinnoibat'>Tin nổi bật</a>";
+                                        echo "<a href='/tinnoibat'>Tin nổi bật</a>";
                                         break;
                                     case '5':
-                                        echo "<a href='../lichtuan'>Lịch tuần</a>";
+                                        echo "<a href='/lichtuan'>Lịch tuần</a>";
                                         break;
                                     case '6':
-                                        echo "<a href='../thidua'>Thi đua</a>";
+                                        echo "<a href='/thidua'>Thi đua</a>";
                                         break;
                                     case '7':
-                                        echo "<a href='../doanvien'>Đoàn viên</a>";
+                                        echo "<a href='/doanvien'>Đoàn viên</a>";
                                         break;
                                     default:
-                                        echo "<a href='../tintuchung'>Tin tức chung</a>";
+                                        echo "<a href='/tintuchung'>Tin tức chung</a>";
                                         break;
                                 }
                                 ?></li>
@@ -236,14 +236,14 @@ $data = fetchNews($conn, $config);
                     </script>
                     <div class="right-column">
                         <div class="notifications">
-                            <a href="./thongbao">
+                            <a href="/thongbao">
                                 <h2>Thông báo</h2>
                             </a>
                             <ul>
                                 <?php
                                 foreach ($data['thong_bao'] as $post) {
                                     $slug = $post['slug'];
-                                    echo "<li><div><a href='./baiviet/$slug'>";
+                                    echo "<li><div><a href='/baiviet/$slug'>";
                                     echo htmlspecialchars($post['title']);
                                     echo "</a>";
                                     echo "<p>" . date('d/m/Y', strtotime($post['last_update']));
@@ -254,7 +254,7 @@ $data = fetchNews($conn, $config);
                             </ul>
                         </div>
                         <div class="news">
-                            <a href="./tintucchung">
+                            <a href="/tintucchung">
                                 <h2>Tin tức chung</h2>
                             </a>
                             <ul>
@@ -262,7 +262,7 @@ $data = fetchNews($conn, $config);
                                 foreach ($data['tin_tuc_chung'] as $post) {
                                     $img = $post['image'];
                                     $slug = $post['slug'];
-                                    echo "<li><div><a href='./baiviet/$slug'>";
+                                    echo "<li><div><a href='/baiviet/$slug'>";
                                     echo "<img src='$img'>";
                                     echo htmlspecialchars($post['title']);
                                     echo "</a>";
@@ -279,7 +279,7 @@ $data = fetchNews($conn, $config);
 
             </div>
             <footer>
-                <?php include "./src/footer.html"; ?>
+                <?php include "/src/footer.html"; ?>
             </footer>
         </div>
         </div>

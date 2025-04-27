@@ -86,7 +86,7 @@ $data = fetchNews($conn, $config);
     <base href="/server/">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chỉnh sửa bài viết - Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên</title>
-    <link href="../logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+    <link href="/logo.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
     <link rel="stylesheet" href="/css/index.css" type="text/css">
     <link rel="stylesheet" href="/css/responsive.css" type="text/css">
     <link rel="stylesheet" href="/css/news.css" type="text/css">
@@ -116,7 +116,7 @@ $data = fetchNews($conn, $config);
                     <div class="taskbar">
                         <div class="left">
                             <div class="logo">
-                                <img src="https://placehold.co/50x50" alt="Logo">
+                                <img src="./logo.ico" alt="Logo">
                                 <p>Cổng thông tin điện tử</p>
                             </div>
                         </div>
@@ -125,14 +125,14 @@ $data = fetchNews($conn, $config);
                                 <a href="https://www.ttn.edu.vn/">Đại học Tây Nguyên</a>
                                 <?php
                                 if ($user == null) {
-                                    echo '<a href="../auth.php">Đăng nhập</a>';
+                                    echo '<a href="/auth.php">Đăng nhập</a>';
                                 } else {
-                                    echo '<a href="../logout.php">Đăng xuất</a>';
+                                    echo '<a href="/logout.php">Đăng xuất</a>';
                                 }
                                 ?>
                                 <?php
                                 if ($user != null && $user['role'] == 'Admin') {
-                                    echo '<a href="../edit.php">Quản lí</a>';
+                                    echo '<a href="/edit.php">Quản lí</a>';
                                 }
                                 ?>
                                 <div class="search-box">
@@ -148,7 +148,7 @@ $data = fetchNews($conn, $config);
         <div class="main">
             <div class="container">
                 <section class="banner">
-                    <img src="../img/B12.jpg" alt="Banner">
+                    <img src="/img/B12.jpg" alt="Banner">
                     <div class="banner-text">
                         <p>Đoàn TNCS Hồ Chí Minh</p>
                         <p>Trường Đại Học Tây Nguyên</p>
@@ -157,7 +157,7 @@ $data = fetchNews($conn, $config);
             </div>
         </div>
         <div class="main">
-            <?php include('./src/navbar.html'); ?>
+            <?php include('/src/navbar.html'); ?>
             <div class="container">
                 <div class="events">
                     <h2 class="event-title">
@@ -188,28 +188,28 @@ $data = fetchNews($conn, $config);
 
                                     switch ($post['type']) {
                                         case 1:
-                                            echo "<a href='../tintucchung'>Tin tức chung</a>";
+                                            echo "<a href='/tintucchung'>Tin tức chung</a>";
                                             break;
                                         case 2:
-                                            echo "<a href='../thongbao'>Thông báo</a>";
+                                            echo "<a href='/thongbao'>Thông báo</a>";
                                             break;
                                         case 3:
-                                            echo "<a href='../sukien'>Sự kiện</a>";
+                                            echo "<a href='/sukien'>Sự kiện</a>";
                                             break;
                                         case 4:
-                                            echo "<a href='../tinnoibat'>Tin nổi bật</a>";
+                                            echo "<a href='/tinnoibat'>Tin nổi bật</a>";
                                             break;
                                         case 5:
-                                            echo "<a href='../lichtuan'>Lịch tuần</a>";
+                                            echo "<a href='/lichtuan'>Lịch tuần</a>";
                                             break;
                                         case 6:
-                                            echo "<a href='../thidua'>Thi đua</a>";
+                                            echo "<a href='/thidua'>Thi đua</a>";
                                             break;
                                         case 7:
-                                            echo "<a href='../doanvien'>Đoàn viên</a>";
+                                            echo "<a href='/doanvien'>Đoàn viên</a>";
                                             break;
                                         default:
-                                            echo "<a href='../tintucchung'>Tin tức chung</a>";
+                                            echo "<a href='/tintucchung'>Tin tức chung</a>";
                                             break;
                                     }
                                     ?>
@@ -239,7 +239,7 @@ $data = fetchNews($conn, $config);
 
                         <button class="btn btn-primary" id="updateButton">Cập nhật bài viết</button>
                         <button class="btn btn-secondary" id="cancelButton"
-                            onclick="window.location.href='../general.php?type=<?php echo $post['type']; ?>'">Hủy</button>
+                            onclick="window.location.href='/general.php?type=<?php echo $post['type']; ?>'">Hủy</button>
 
                         <script>
                             let isSaved = true;
@@ -412,7 +412,7 @@ $data = fetchNews($conn, $config);
                                             tempFiles = [];
                                             alert(data.message);
                                             if (data.success) {
-                                                window.location.href = '../general.php?type=' + type;
+                                                window.location.href = '/general.php?type=' + type;
                                             }
                                         })
                                         .catch(error => {
@@ -474,7 +474,7 @@ $data = fetchNews($conn, $config);
             </div>
         </div>
         <footer>
-            <?php include "./src/footer.html"; ?>
+            <?php include "/src/footer.html"; ?>
         </footer>
     </section>
     <button id="backToTop" class="back-to-top"><i class="fi fi-sr-arrow-to-top"></i></button>
