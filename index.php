@@ -99,7 +99,7 @@ $data = fetchNews($conn, $config);
                         <div class="left">
                             <div class="logo">
                                 <img src="./logo.ico" alt="Logo">
-                                Cổng thông tin điện tử
+                               <p> Cổng thông tin điện tử</p>
                             </div>
                         </div>
                         <div class="right">

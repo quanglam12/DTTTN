@@ -98,7 +98,7 @@ $data = fetchNews($conn, $config);
                         <div class="left">
                             <div class="logo">
                                 <img src="https://placehold.co/50x50" alt="Logo">
-                                Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên
+                               <p>Cổng thông tin điện tử</p>
                             </div>
                         </div>
                         <div class="right">
@@ -130,12 +130,15 @@ $data = fetchNews($conn, $config);
             <div class="container">
                 <section class="banner">
                     <img src="/img/B12.jpg" alt="Banner">
-                    <div class="banner-text">Đoàn TNCS Hồ Chí Minh trường Đại học Tây Nguyên</div>
+                    <div class="banner-text">
+                        <p>Đoàn TNCS Hồ Chí Minh</p>
+                        <p>Trường Đại Học Tây Nguyên</p>
+                    </div>
                 </section>
             </div>
         </div>
         <div class="main">
-        <?php include('./src/navbar.html');?>
+            <?php include('./src/navbar.html'); ?>
             <div class="container">
                 <div class="events">
                     <h2 class="event-title">
@@ -269,7 +272,7 @@ $data = fetchNews($conn, $config);
 
             </div>
             <footer>
-                <?php include "./src/footer.html";?>
+                <?php include "./src/footer.html"; ?>
             </footer>
         </div>
         </div>

@@ -4,6 +4,12 @@
     padding: 0;
     box-sizing: border-box;
 }
+@font-face {
+    font-family: 'SVN-Avo';
+    src: url('/src/fonts/SVN-Avo.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html {
     font-size: 16px;
@@ -67,6 +73,13 @@ body {
     width: 50px;
     height: 50px;
 }
+.taskbar .logo p {
+    font-family: 'SVN-Avo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color:#4dc63d;
+    margin: 0;
+}
 
 .taskbar nav {
     display: flex;
@@ -124,7 +137,24 @@ body {
     text-align: center;
     font-size: 1.75rem;
     font-weight: bold;
+    text-transform: uppercase;
     z-index: 1;
+}
+.banner-text p:first-child {
+    font-family: 'SVN-Avo', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #006400;
+    text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff;
+    margin: 0.5rem 0;
+}
+.banner-text p:last-child {
+    font-family: 'SVN-Avo', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: #e53935;
+    text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff;
+    margin: 0.5rem 0;
 }
 
 /* Navbar */
