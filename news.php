@@ -131,7 +131,7 @@ $data = fetchNews($conn, $config);
             <div class="container">
                 <div class="events">
                     <h2 class="event-title">
-                        <a href="./sukien">
+                        <a href="/sukien">
                             Sự Kiện
                         </a>
                     </h2>

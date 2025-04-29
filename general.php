@@ -18,12 +18,12 @@ $total_result = $conn->query($total_query);
 $total_row = $total_result->fetch_assoc();
 $total_posts = $total_row['total'];
 
-$total_pages = ceil($total_posts / $posts_per_page);
+$total_pages = ($total_posts / $posts_per_page);
 
 $sql = "SELECT type_name, post_id, title, slug, image, last_update 
         FROM type_of_post 
         INNER JOIN posts ON type_of_post.type_id = posts.type 
-        WHERE type_id = ? 
+        WHERE type_id = ? AND status = 'Posted'
         ORDER BY last_update DESC 
         LIMIT ?, ?";
 $stmt = $conn->prepare($sql);
@@ -98,7 +98,7 @@ $data = fetchNews($conn, $config);
                         <div class="left">
                             <div class="logo">
                                 <img src="/logo.ico" alt="Logo">
-                               <p>Cổng thông tin điện tử</p>
+                                <p>Cổng thông tin điện tử</p>
                             </div>
                         </div>
                         <div class="right">
@@ -168,7 +168,6 @@ $data = fetchNews($conn, $config);
                                 <li><a href="/" id="homepage-url" class="home">Trang Chủ</a></li>
                                 <li class="active"><span>/</span><a href=""><?php
                                 $row = $result->fetch_assoc();
-
                                 if ($row && isset($row['type_name'])) {
                                     echo htmlspecialchars($row['type_name']);
                                 } else {
@@ -184,16 +183,22 @@ $data = fetchNews($conn, $config);
                             <p class="date"></p>
                             <div class="detail-content">
                                 <div class="listnews">
-                                    <?php if ($result->num_rows > 0): ?>
+                                    <?php echo "Số bản ghi: " . $result->num_rows . "<br>";
+                                    if ($result->num_rows > 0): ?>
                                         <ul>
-                                            <?php while ($row = $result->fetch_assoc()): ?>
+                                            <?php
+                                            $result->data_seek(0);
+                                            while ($row = $result->fetch_assoc()): ?>
                                                 <li>
-                                                    <a href="<?php echo htmlspecialchars($row['slug']); ?>">
-                                                        <img src="<?php echo htmlspecialchars($row['image']); ?>"
-                                                            alt="<?php echo htmlspecialchars($row['title']); ?>">
-                                                        <p class="title"><?php echo htmlspecialchars($row['title']); ?></p>
+                                                    <a href="/baiviet/<?php echo htmlspecialchars($row['slug'] ?? ''); ?>">
+                                                        <img src="<?php echo htmlspecialchars($row['image'] ?? '/img/default.png'); ?>"
+                                                            alt="<?php echo htmlspecialchars($row['title'] ?? 'No Title'); ?>">
+                                                        <p class="title">
+                                                            <?php echo htmlspecialchars($row['title'] ?? 'No Title'); ?>
+                                                        </p>
                                                         <small>
-                                                            <?php echo date("d/m/Y", strtotime($row['last_update'])); ?></small>
+                                                            <?php echo !empty($row['last_update']) ? date("d/m/Y", strtotime($row['last_update'])) : 'No Date'; ?>
+                                                        </small>
                                                     </a>
                                                 </li>
                                             <?php endwhile; ?>
