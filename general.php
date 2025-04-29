@@ -183,8 +183,7 @@ $data = fetchNews($conn, $config);
                             <p class="date"></p>
                             <div class="detail-content">
                                 <div class="listnews">
-                                    <?php echo "Số bản ghi: " . $result->num_rows . "<br>";
-                                    if ($result->num_rows > 0): ?>
+                                    <?php if ($result->num_rows > 0): ?>
                                         <ul>
                                             <?php
                                             $result->data_seek(0);
