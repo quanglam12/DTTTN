@@ -98,8 +98,10 @@ $data = fetchNews($conn, $config);
                     <div class="taskbar">
                         <div class="left">
                             <div class="logo">
-                                <img src="./logo.ico" alt="Logo">
-                               <p> Cổng thông tin điện tử</p>
+                                <a href="/">
+                                    <img src="/logo.ico" alt="Logo">
+                                </a>
+                                <p> Cổng thông tin điện tử</p>
                             </div>
                         </div>
                         <div class="right">
@@ -134,12 +136,12 @@ $data = fetchNews($conn, $config);
                     <div class="banner-text">
                         <p>Đoàn TNCS Hồ Chí Minh</p>
                         <p>Trường Đại Học Tây Nguyên</p>
-                </div>
+                    </div>
                 </section>
             </div>
         </div>
         <div class="main">
-            <?php include('./src/navbar.html');?>
+            <?php include('./src/navbar.html'); ?>
             <div class="container">
                 <div class="events">
                     <?php
@@ -471,7 +473,7 @@ $data = fetchNews($conn, $config);
 
             </div>
             <footer>
-                <?php include "./src/footer.html";?>
+                <?php include "./src/footer.html"; ?>
             </footer>
         </div>
         </div>

@@ -28,7 +28,9 @@ $user = autoLogin($conn);
                     <div class="taskbar">
                         <div class="left">
                             <div class="logo">
-                                <img src="/logo.ico" alt="Logo">
+                                <a href="/">
+                                    <img src="/logo.ico" alt="Logo">
+                                </a>
                                 <p> Cổng thông tin điện tử</p>
                             </div>
                         </div>
@@ -69,7 +71,7 @@ $user = autoLogin($conn);
             </div>
         </div>
         <div class="main">
-            <?php include('/src/navbar.html'); ?>
+            <?php include('./src/navbar.html'); ?>
         </div>
         <div class="main">
             <div class="container">
