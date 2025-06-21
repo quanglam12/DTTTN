@@ -74,3 +74,32 @@ th {
     color: #888;
     margin: 20px 0;
 }
+.attachment {
+    margin: 10px 0;
+}
+.attachment-video {
+    max-width: 100%;
+}
+.video-player {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+.file-icon {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.attachment-info {
+    font-size: 0.9em;
+    color: #666;
+}
+.attachment-link {
+    text-decoration: none;
+    color: #007bff;
+}
+.attachment-link:hover {
+    text-decoration: underline;
+}
