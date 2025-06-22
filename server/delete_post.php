@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 }
 
 // Lấy post_id từ URL (query parameter)
-$post_id = $_GET['id'] ?? null;
+$post_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT) ?? null;
 if (!$post_id) {
     echo json_encode(['success' => 0, 'message' => 'Không tìm thấy ID bài viết']);
     exit;

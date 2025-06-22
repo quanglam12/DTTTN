@@ -9,7 +9,7 @@ if ($user['role'] != 'Admin') {
 }
 
 // Lấy post_id từ URL (query parameter)
-$post_id = $_GET['id'] ?? null;
+$post_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT) ?? null;
 if (!$post_id) {
     exit("Không tìm thấy bài viết để chỉnh sửa");
 }

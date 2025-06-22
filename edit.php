@@ -1,4 +1,11 @@
 <?php
+if (session_status() === PHP_SESSION_NONE)
+    session_start();
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+?>
+<?php
 require "../config/db_connect.php";
 include "./auto_login.php";
 
@@ -8,7 +15,8 @@ if ($user['role'] != 'Admin') {
 }
 
 $posts_per_page = 10;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page_raw = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT);
+$page = isset($page_raw) ? (int) $page_raw : 1;
 $offset = ($page - 1) * $posts_per_page;
 
 // Filter and search parameters
@@ -16,29 +24,33 @@ $where_conditions = "1=1"; // Base condition
 $params = array();
 
 // Chỉ thêm điều kiện status nếu có giá trị
-$status = isset($_GET['status']) ? $_GET['status'] : 'Pending';
+$status_raw = filter_input(INPUT_GET, 'status', FILTER_SANITIZE_STRING);
+$status = isset($status_raw) ? $status_raw : 'Pending';
+
 if (!empty($status)) {
     $where_conditions .= " AND p.status = ?";
     $params[] = $status;
 }
 
-if (!empty($_GET['author_id'])) {
+if (!empty(filter_input(INPUT_GET, 'author_id', FILTER_SANITIZE_NUMBER_INT))) {
     $where_conditions .= " AND p.author_id = ?";
-    $params[] = $_GET['author_id'];
+    $params[] = filter_input(INPUT_GET, 'author_id', FILTER_SANITIZE_NUMBER_INT);
 }
 
-if (!empty($_GET['title'])) {
+if (!empty(filter_input(INPUT_GET, 'title', FILTER_SANITIZE_STRING))) {
     $where_conditions .= " AND p.title LIKE ?";
-    $params[] = "%" . $_GET['title'] . "%";
+    $params[] = "%" . filter_input(INPUT_GET, 'title', FILTER_SANITIZE_STRING) . "%";
 }
 
-if (!empty($_GET['type'])) {
+if (!empty(filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT))) {
     $where_conditions .= " AND p.type = ?";
-    $params[] = $_GET['type'];
+    $params[] = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT);
 }
 
 // Sort parameter
-$sort_order = isset($_GET['sort']) && in_array($_GET['sort'], ['ASC', 'DESC']) ? $_GET['sort'] : 'DESC';
+$sort_raw = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
+$sort_order = (isset($sort_raw) && in_array($sort_raw, ['ASC', 'DESC'])) ? $sort_raw : 'DESC';
+
 $order_by = "ORDER BY p.create_at $sort_order";
 
 // Count total posts
@@ -75,15 +87,31 @@ $result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Quản lý bài viết</title>
     <style>
-        table { border-collapse: collapse; width: 100%; }
-        th, td { padding: 8px; border: 1px solid #ddd; }
-        .pagination { margin: 20px 0; }
-        .filter-form { margin-bottom: 20px; }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .pagination {
+            margin: 20px 0;
+        }
+
+        .filter-form {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
+
 <body>
     <h1>Quản lý bài viết</h1>
 
@@ -92,29 +120,44 @@ $result = $stmt->get_result();
         <form method="GET">
             <select name="status">
                 <option value="">Tất cả trạng thái</option>
-                <option value="Pending" <?php if ($status === 'Pending') echo 'selected'; ?>>Chờ xử lí</option>
-                <option value="Writing" <?php if ($status === 'Writing') echo 'selected'; ?>>Bản nháp</option>
-                <option value="Posted" <?php if ($status === 'Posted') echo 'selected'; ?>>Đã đăng</option>
-                <option value="Deny" <?php if ($status === 'Deny') echo 'selected'; ?>>Từ chối</option>
+                <option value="Pending" <?php if ($status === 'Pending')
+                    echo 'selected'; ?>>Chờ xử lí</option>
+                <option value="Writing" <?php if ($status === 'Writing')
+                    echo 'selected'; ?>>Bản nháp</option>
+                <option value="Posted" <?php if ($status === 'Posted')
+                    echo 'selected'; ?>>Đã đăng</option>
+                <option value="Deny" <?php if ($status === 'Deny')
+                    echo 'selected'; ?>>Từ chối</option>
             </select>
 
-            <input type="text" name="title" placeholder="Tìm theo tiêu đề" value="<?php echo htmlspecialchars($_GET['title'] ?? ''); ?>">
-            <input type="number" name="author_id" placeholder="ID tác giả" value="<?php echo htmlspecialchars($_GET['author_id'] ?? ''); ?>">
+            <input type="text" name="title" placeholder="Tìm theo tiêu đề"
+                value="<?php echo htmlspecialchars(filter_input(INPUT_GET, 'title', FILTER_SANITIZE_STRING) ?? ''); ?>">
+            <input type="number" name="author_id" placeholder="ID tác giả"
+                value="<?php echo htmlspecialchars(filter_input(INPUT_GET, 'author_id', FILTER_SANITIZE_NUMBER_INT) ?? ''); ?>">
 
             <select name="type">
                 <option value="">Tất cả thể loại</option>
-                <option value="1" <?php if (($_GET['type'] ?? '') === '1') echo 'selected'; ?>>Tin tức chung</option>
-                <option value="2" <?php if (($_GET['type'] ?? '') === '2') echo 'selected'; ?>>Thông báo</option>
-                <option value="3" <?php if (($_GET['type'] ?? '') === '3') echo 'selected'; ?>>Sự kiện</option>
-                <option value="4" <?php if (($_GET['type'] ?? '') === '4') echo 'selected'; ?>>Tin nổi bật</option>
-                <option value="5" <?php if (($_GET['type'] ?? '') === '5') echo 'selected'; ?>>Lịch tuần</option>
-                <option value="6" <?php if (($_GET['type'] ?? '') === '6') echo 'selected'; ?>>Thi đua</option>
-                <option value="7" <?php if (($_GET['type'] ?? '') === '7') echo 'selected'; ?>>Đoàn viên</option>
+                <option value="1" <?php if ((filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? '') === '1')
+                    echo 'selected'; ?>>Tin tức chung</option>
+                <option value="2" <?php if ((filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? '') === '2')
+                    echo 'selected'; ?>>Thông báo</option>
+                <option value="3" <?php if ((filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? '') === '3')
+                    echo 'selected'; ?>>Sự kiện</option>
+                <option value="4" <?php if ((filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? '') === '4')
+                    echo 'selected'; ?>>Tin nổi bật</option>
+                <option value="5" <?php if ((filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? '') === '5')
+                    echo 'selected'; ?>>Lịch tuần</option>
+                <option value="6" <?php if ((filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? '') === '6')
+                    echo 'selected'; ?>>Thi đua</option>
+                <option value="7" <?php if ((filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? '') === '7')
+                    echo 'selected'; ?>>Đoàn viên</option>
             </select>
 
             <select name="sort">
-                <option value="DESC" <?php if ($sort_order === 'DESC') echo 'selected'; ?>>Mới nhất trước</option>
-                <option value="ASC" <?php if ($sort_order === 'ASC') echo 'selected'; ?>>Cũ nhất trước</option>
+                <option value="DESC" <?php if ($sort_order === 'DESC')
+                    echo 'selected'; ?>>Mới nhất trước</option>
+                <option value="ASC" <?php if ($sort_order === 'ASC')
+                    echo 'selected'; ?>>Cũ nhất trước</option>
             </select>
 
             <button type="submit">Lọc</button>
@@ -123,6 +166,7 @@ $result = $stmt->get_result();
 
     <!-- Posts Table -->
     <form method="POST" id="posts-form">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <table>
             <thead>
                 <tr>
@@ -144,24 +188,25 @@ $result = $stmt->get_result();
                         <td style="display:none"><?php echo $row['post_id']; ?></td>
                         <td><?php echo htmlspecialchars($row['title']); ?></td>
                         <td><?php echo htmlspecialchars($row['author_name'] ?? ''); ?></td>
-                        <td><?php 
-                            $types = [
-                                1 => 'Tin tức chung',
-                                2 => 'Thông báo',
-                                3 => 'Sự kiện',
-                                4 => 'Tin nổi bật',
-                                5 => 'Lịch tuần',
-                                6 => 'Thi đua',
-                                7 => 'Đoàn viên'
-                            ];
-                            echo $types[$row['type']] ?? $row['type'];
+                        <td><?php
+                        $types = [
+                            1 => 'Tin tức chung',
+                            2 => 'Thông báo',
+                            3 => 'Sự kiện',
+                            4 => 'Tin nổi bật',
+                            5 => 'Lịch tuần',
+                            6 => 'Thi đua',
+                            7 => 'Đoàn viên'
+                        ];
+                        echo $types[$row['type']] ?? $row['type'];
                         ?></td>
                         <td><?php echo $row['status']; ?></td>
                         <td><?php echo $row['create_at']; ?></td>
                         <td><?php echo $row['last_update'] ?? 'Chưa cập nhật'; ?></td>
                         <td>
                             <a href="./server/edit_post.php?id=<?php echo $row['post_id']; ?>">Sửa</a>
-                            <a href="./server/delete_post.php?id=<?php echo $row['post_id']; ?>" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
+                            <a href="./server/delete_post.php?id=<?php echo $row['post_id']; ?>"
+                                onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>
@@ -187,7 +232,8 @@ $result = $stmt->get_result();
         <?php endif; ?>
 
         <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-            <a href="?page=<?php echo $i; ?>&<?php echo http_build_query($_GET); ?>" <?php if ($page == $i) echo 'style="font-weight: bold;"'; ?>>
+            <a href="?page=<?php echo $i; ?>&<?php echo http_build_query($_GET); ?>" <?php if ($page == $i)
+                      echo 'style="font-weight: bold;"'; ?>>
                 <?php echo $i; ?>
             </a>
         <?php endfor; ?>
@@ -198,7 +244,7 @@ $result = $stmt->get_result();
     </div>
 
     <script>
-        document.getElementById('select-all').onclick = function() {
+        document.getElementById('select-all').onclick = function () {
             var checkboxes = document.getElementsByName('post_ids[]');
             for (var checkbox of checkboxes) {
                 checkbox.checked = this.checked;
@@ -206,13 +252,17 @@ $result = $stmt->get_result();
         }
     </script>
 </body>
+
 </html>
 
 <?php
 // Handle bulk actions
-if (isset($_POST['apply_bulk']) && !empty($_POST['post_ids']) && !empty($_POST['bulk_action'])) {
+$apply_bulk = filter_input(INPUT_POST, 'apply_bulk', FILTER_SANITIZE_STRING);
+$bulk_action = filter_input(INPUT_POST, 'bulk_action', FILTER_SANITIZE_STRING);
+if (isset($apply_bulk) && !empty($_POST['post_ids']) && !empty($bulk_action)) {
+
     $post_ids = implode(',', array_map('intval', $_POST['post_ids']));
-    switch ($_POST['bulk_action']) {
+    switch (filter_input(INPUT_POST, 'bulk_action', FILTER_SANITIZE_STRING)) {
         case 'publish':
             $res = $conn->query("UPDATE posts SET status = 'Posted', last_update = NOW() WHERE post_id IN ($post_ids)");
             break;
@@ -224,9 +274,15 @@ if (isset($_POST['apply_bulk']) && !empty($_POST['post_ids']) && !empty($_POST['
             break;
     }
     if ($result) {
-        echo "Có: " . $conn->affected_rows . " bài viết đã được cập nhật!";
+        if ($conn instanceof mysqli) {
+            echo "Có: " . $conn->affected_rows . " bài viết đã được cập nhật!";
+        } else {
+            echo "Không thể xác định kết quả.";
+        }
     } else {
-        echo "Lỗi: " . $conn->error;
+        if ($conn instanceof mysqli) {
+            echo "Lỗi: " . $conn->error;
+        }
     }
     exit;
 }

@@ -6,7 +6,7 @@ $user = autoLogin($conn);
 if ($user['role'] != 'Admin') {
     exit("Không có quyền truy cập");
 }
-$type = $_GET['type'] ?? 1;
+$type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? 1;
 $type = filter_var($type, FILTER_SANITIZE_NUMBER_INT);
 $type = (int) $type;
 

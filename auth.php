@@ -19,7 +19,7 @@ if ($user) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Ký & Đăng Nhập</title>
+    <title>Đăng Nhập</title>
     <link rel="icon" href="./logo.ico" type="image/x-icon">
 </head>
 

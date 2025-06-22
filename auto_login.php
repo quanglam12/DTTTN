@@ -1,14 +1,19 @@
 <?php
 require(__DIR__ . '/../config/db_connect.php');
-session_set_cookie_params([
-    'lifetime' => 0,
-    'path' => '/',
-    'secure' => false,
-    'httponly' => true,
-    'samesite' => 'Strict'
-]);
-session_start();
-session_regenerate_id(true);
+
+// Chỉ thiết lập cookie và start session nếu chưa có
+if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => false,
+        'httponly' => true,
+        'samesite' => 'Strict'
+    ]);
+    session_start();
+    session_regenerate_id(true);
+}
+
 function autoLogin($conn)
 {
     if (isset($_COOKIE['token'])) {
@@ -19,7 +24,7 @@ function autoLogin($conn)
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
             $user = $result->fetch_assoc();
             $newToken = bin2hex(random_bytes(32));
             $hashedNewToken = hash('sha256', $newToken);
@@ -31,6 +36,7 @@ function autoLogin($conn)
 
             setcookie('token', $newToken, time() + (30 * 24 * 60 * 60), "/", "", true, true);
 
+            $_SESSION['user_id'] = $user['user_id'];
             return $user;
         }
     } elseif (isset($_SESSION['user_id'])) {
@@ -41,7 +47,7 @@ function autoLogin($conn)
         $stmt->execute();
         $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
             $user = $result->fetch_assoc();
             return $user;
         }
