@@ -5,7 +5,7 @@ include "../settings.php";
 
 // Kiểm tra quyền truy cập (chỉ Admin)
 $user = autoLogin($conn);
-if ($user['role'] != 'Admin') {
+if ($user['role'] != 'Admin' && $user['role'] != 'Manager' && $user['role'] != 'Author') {
     echo json_encode(['success' => 0, 'message' => 'Không có quyền truy cập']);
     exit;
 }
@@ -53,6 +53,11 @@ $title = $data['title'];
 $slug = slugify($title); // Tạo slug mới từ title
 $content = $data['content'];
 $type = (int) $data['type'];
+if ($user['role'] == 'Author') {
+    if ($user['unit_id'] <= 8) {
+        $type = 1;
+    }
+}
 
 // Xử lý trạng thái bài viết
 if (isset($data['status']) && $data['status'] === "Writing") {
@@ -111,7 +116,7 @@ $urlImg = null;
 foreach ($content['blocks'] as &$block) {
     if ($block['type'] === 'image' && isset($block['data']['file']['url'])) {
         $fileName = basename($block['data']['file']['url']);
-        $block['data']['file']['url'] = $Domain .'server/' . $savedDir . $fileName;
+        $block['data']['file']['url'] = $Domain . 'server/' . $savedDir . $fileName;
         if ($urlImg === null) {
             $urlImg = $block['data']['file']['url'];
         }
@@ -144,9 +149,10 @@ if ($stmt->execute()) {
             'message' => 'Tiêu đề bị trùng, vui lòng thay đổi'
         ];
     } else {
+        $error_message = isset($conn) && $conn instanceof mysqli ? $conn->error : 'Không xác định';
         $response = [
             'success' => 0,
-            'message' => 'Xảy ra lỗi: ' . $conn->error // Có thể thêm chi tiết lỗi để debug
+            'message' => 'Xảy ra lỗi: ' . $error_message
         ];
     }
 }

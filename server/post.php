@@ -3,12 +3,18 @@ require "../../config/db_connect.php";
 include "../auto_login.php";
 
 $user = autoLogin($conn);
-if ($user['role'] != 'Admin') {
+if ($user['role'] != 'Admin' && $user['role'] != 'Manager' && $user['role'] != 'Author') {
     exit("Không có quyền truy cập");
 }
 $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_NUMBER_INT) ?? 1;
 $type = filter_var($type, FILTER_SANITIZE_NUMBER_INT);
 $type = (int) $type;
+
+if ($user['role'] == 'Author'){
+    if ($user['unit_id'] <= 8) {
+       $type = 1;
+    }
+}
 
 $config = [
     'tin_tuc_chung' => [

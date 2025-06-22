@@ -4,7 +4,7 @@ include "../auto_login.php";
 
 // Kiểm tra quyền truy cập (chỉ Admin)
 $user = autoLogin($conn);
-if ($user['role'] != 'Admin') {
+if ($user['role'] != 'Admin' && $user['role'] != 'Manager') {
     echo json_encode(['success' => 0, 'message' => 'Không có quyền truy cập']);
     exit;
 }
@@ -109,9 +109,10 @@ if ($stmt_delete->execute()) {
         'message' => 'Xóa bài viết thành công'
     ];
 } else {
+    $error_message = isset($conn) && $conn instanceof mysqli ? $conn->error : 'Không xác định';
     $response = [
         'success' => 0,
-        'message' => 'Xảy ra lỗi khi xóa bài viết: ' . $conn->error
+        'message' => 'Xảy ra lỗi khi xóa bài viết: ' . $error_message
     ];
 }
 

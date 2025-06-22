@@ -4,7 +4,7 @@ include "../auto_login.php";
 
 // Kiểm tra quyền truy cập (chỉ Admin)
 $user = autoLogin($conn);
-if ($user['role'] != 'Admin') {
+if ($user['role'] != 'Admin' && $user['role'] != 'Manager' && $user['role'] != 'Author') {
     exit("Không có quyền truy cập");
 }
 

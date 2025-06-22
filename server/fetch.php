@@ -5,7 +5,7 @@ include "../settings.php";
 
 $user = autoLogin($conn);
 
-if ($user['role'] != 'Admin') {
+if ($user['role'] != 'Admin' && $user['role'] != 'Manager' && $user['role'] != 'Author') {
     echo json_encode(['success' => 0, 'message' => 'Không có quyền truy cập']);
     exit;
 }

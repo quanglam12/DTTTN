@@ -5,9 +5,8 @@ include "../settings.php";
 
 $user = autoLogin($conn);
 
-if ($user['role'] != 'Admin') {
-    echo json_encode(['success' => 0, 'message' => 'Không có quyền truy cập']);
-    exit;
+if ($user['role'] != 'Admin' && $user['role'] != 'Manager' && $user['role'] != 'Author') {
+    exit("Không có quyền truy cập");
 }
 header('Content-Type: application/json');
 
@@ -169,6 +168,12 @@ $data['content'] = $content;
 $content = json_encode($data['content'], JSON_UNESCAPED_UNICODE);
 $author = (int) $user['user_id'];
 $type = (int) $data['type'];
+
+if ($user['role'] == 'Author') {
+    if ($user['unit_id'] <= 8) {
+        $type = 1;
+    }
+}
 
 $sql = "INSERT INTO posts (title, slug, image, type, status, content, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
