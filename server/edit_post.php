@@ -15,7 +15,7 @@ if (!$post_id) {
 }
 
 // Lấy thông tin bài viết từ cơ sở dữ liệu
-$sql = "SELECT title, type, content FROM posts WHERE post_id = ?";
+$sql = "SELECT title, type, content, unit_id FROM posts WHERE post_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $post_id);
 $stmt->execute();
@@ -226,6 +226,27 @@ $data = fetchNews($conn, $config);
                         <input class="form-input" type="text" id="titleInput"
                             value="<?php echo htmlspecialchars($post['title']); ?>" placeholder="Nhập tiêu đề bài viết">
 
+                        <?php
+                        // Lấy danh sách unit từ DB
+                        $units = [];
+                        $unitQuery = "SELECT unit_id, unit_name FROM unit";
+                        $resultUnits = $conn->query($unitQuery);
+                        while ($row = $resultUnits->fetch_assoc()) {
+                            $units[] = $row;
+                        }
+                        ?>
+                       <?php if ($user['role'] != 'Admin' && $user['role'] != 'Manager'): ?>
+                        <label class="form-label" for="unitSelect">Đơn vị (khoa/trường):</label>
+                        <select class="form-select" id="unitSelect">
+                            <?php foreach ($units as $unit): ?>
+                                <option value="<?php echo $unit['unit_id']; ?>"
+                            <?php echo ($unit['unit_id'] == $post['unit_id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($unit['unit_name']); ?>
+                                 </option>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php endif; ?>
+                        <?php if ($user['role'] != 'Admin' && $user['role'] != 'Manager'): ?>
                         <label class="form-label" for="typeSelect">Loại bài viết:</label>
                         <select class="form-select" id="typeSelect">
                             <option value="1" <?php echo $post['type'] == 1 ? 'selected' : ''; ?>>Tin tức chung</option>
@@ -236,7 +257,7 @@ $data = fetchNews($conn, $config);
                             <option value="6" <?php echo $post['type'] == 6 ? 'selected' : ''; ?>>Thi đua</option>
                             <option value="7" <?php echo $post['type'] == 7 ? 'selected' : ''; ?>>Đoàn viên</option>
                         </select>
-
+                        <?php endif; ?>
                         <div class="editorjs" id="editorjs"></div>
 
                         <button class="btn btn-primary" id="updateButton">Cập nhật bài viết</button>
@@ -386,6 +407,7 @@ $data = fetchNews($conn, $config);
                             document.getElementById('updateButton').addEventListener('click', () => {
                                 const title = document.getElementById('titleInput').value;
                                 const type = document.getElementById('typeSelect').value;
+                                const unit = document.getElementById('unitSelect')?.value || null;
 
                                 if (!title) {
                                     alert('Vui lòng nhập tiêu đề!');
@@ -397,6 +419,7 @@ $data = fetchNews($conn, $config);
                                         post_id: <?php echo $post_id; ?>,
                                         title: title,
                                         type: type,
+                                        unit_id: unit,
                                         content: outputData
                                     };
 

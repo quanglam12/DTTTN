@@ -53,6 +53,7 @@ $title = $data['title'];
 $slug = slugify($title); // Tạo slug mới từ title
 $content = $data['content'];
 $type = (int) $data['type'];
+$unit_id = (int) ($data['unit_id'] ?? $user['unit_id']);
 if ($user['role'] == 'Author') {
     if ($user['unit_id'] <= 8) {
         $type = 1;
@@ -131,9 +132,9 @@ $content = json_encode($content, JSON_UNESCAPED_UNICODE);
 $author = (int) $user['user_id'];
 
 // Câu lệnh SQL để cập nhật bài viết
-$sql = "UPDATE posts SET title = ?, slug = ?, image = ?, type = ?, content = ? WHERE post_id = ?";
+$sql = "UPDATE posts SET title = ?, slug = ?, image = ?, type = ?, content = ?, unit_id = ? WHERE post_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssisi", $title, $slug, $urlImg, $type, $content, $post_id);
+$stmt->bind_param("sssisii", $title, $slug, $urlImg, $type, $content, $unit_id, $post_id);
 
 $response = [];
 if ($stmt->execute()) {

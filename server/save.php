@@ -174,10 +174,11 @@ if ($user['role'] == 'Author') {
         $type = 1;
     }
 }
+$unit_id = (int) $user['unit_id'];
 
-$sql = "INSERT INTO posts (title, slug, image, type, status, content, author_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO posts (title, slug, image, type, status, content, author_id, unit_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssissi", $title, $slug, $urlImg, $type, $status, $content, $author);
+$stmt->bind_param("sssissii", $title, $slug, $urlImg, $type, $status, $content, $author, $unit_id);
 
 $response = [];
 if ($stmt->execute()) {
