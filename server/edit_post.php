@@ -110,54 +110,8 @@ $data = fetchNews($conn, $config);
 
 <body>
     <section id="wrapper">
-        <header>
-            <div class="main">
-                <div class="container">
-                    <div class="taskbar">
-                        <div class="left">
-                            <div class="logo">
-                                <a href="/">
-                                    <img src="/logo.ico" alt="Logo">
-                                </a>
-                                <p>Cổng thông tin điện tử</p>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <nav>
-                                <a href="https://www.ttn.edu.vn/">Đại học Tây Nguyên</a>
-                                <?php
-                                if ($user == null) {
-                                    echo '<a href="/auth.php">Đăng nhập</a>';
-                                } else {
-                                    echo '<a href="/logout.php">Đăng xuất</a>';
-                                }
-                                ?>
-                                <?php
-                                if ($user != null && $user['role'] == 'Admin') {
-                                    echo '<a href="/edit.php">Quản lí</a>';
-                                }
-                                ?>
-                                <div class="search-box">
-                                    <input type="text" placeholder="Search...">
-                                    <button>🔍</button>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="main">
-            <div class="container">
-                <section class="banner">
-                    <img src="/img/B12.jpg" alt="Banner">
-                    <div class="banner-text">
-                        <p>Đoàn TNCS Hồ Chí Minh</p>
-                        <p>Trường Đại Học Tây Nguyên</p>
-                    </div>
-                </section>
-            </div>
-        </div>
+        <?php include('../src/header.php'); ?>
+        <?php include('../src/banner.html'); ?>
         <div class="main">
             <?php include('../src/navbar.html'); ?>
             <div class="container">
@@ -171,7 +125,7 @@ $data = fetchNews($conn, $config);
                         <?php
                         foreach ($data['su_kien'] as $p) {
                             $slug = $p['slug'];
-                            echo "<li><a href='./baiviet/$slug'>";
+                            echo "<li><a href='/baiviet/$slug'>";
                             echo htmlspecialchars($p['title']);
                             echo "</a></li>";
                         }
@@ -184,7 +138,7 @@ $data = fetchNews($conn, $config);
                     <div class="left-column">
                         <div class="list_arrow_breakumb">
                             <ul>
-                                <li><a href="http://youth.neu.edu.vn" id="homepage-url" class="home">Trang Chủ</a></li>
+                                <li><a href="/" id="homepage-url" class="home">Trang Chủ</a></li>
                                 <li><span>/</span>
                                     <?php
 
@@ -235,7 +189,7 @@ $data = fetchNews($conn, $config);
                             $units[] = $row;
                         }
                         ?>
-                       <?php if ($user['role'] != 'Admin' && $user['role'] != 'Manager'): ?>
+                       <?php if ($user['role'] == 'Admin' || $user['role'] == 'Manager'): ?>
                         <label class="form-label" for="unitSelect">Đơn vị (khoa/trường):</label>
                         <select class="form-select" id="unitSelect">
                             <?php foreach ($units as $unit): ?>
@@ -246,7 +200,7 @@ $data = fetchNews($conn, $config);
                                 <?php endforeach; ?>
                             </select>
                         <?php endif; ?>
-                        <?php if ($user['role'] != 'Admin' && $user['role'] != 'Manager'): ?>
+                        <?php if ($user['role'] == 'Admin' || $user['role'] == 'Manager'): ?>
                         <label class="form-label" for="typeSelect">Loại bài viết:</label>
                         <select class="form-select" id="typeSelect">
                             <option value="1" <?php echo $post['type'] == 1 ? 'selected' : ''; ?>>Tin tức chung</option>

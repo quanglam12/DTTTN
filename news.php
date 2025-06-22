@@ -80,54 +80,8 @@ $data = fetchNews($conn, $config);
 
 <body>
     <section id="wrapper">
-        <header>
-            <div class="main">
-                <div class="container">
-                    <div class="taskbar">
-                        <div class="left">
-                            <div class="logo">
-                                <a href="/">
-                                    <img src="/logo.ico" alt="Logo">
-                                </a>
-                                <p>Cổng thông tin điện tử</p>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <nav>
-                                <a href="https://www.ttn.edu.vn/">Đại học Tây Nguyên</a>
-                                <?php
-                                if ($user == null) {
-                                    echo '<a href="/auth.php">Đăng nhập</a>';
-                                } else {
-                                    echo '<a href="/logout.php">Đăng xuất</a>';
-                                }
-                                ?>
-                                <?php
-                                if ($user != null && $user['role'] == 'Admin') {
-                                    echo '<a href="/edit.php">Quản lí</a>';
-                                }
-                                ?>
-                                <div class="search-box">
-                                    <input type="text" placeholder="Search...">
-                                    <button>🔍</button>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="main">
-            <div class="container">
-                <section class="banner">
-                    <img src="/img/B12.jpg" alt="Banner">
-                    <div class="banner-text">
-                        <p>Đoàn TNCS Hồ Chí Minh</p>
-                        <p>Trường Đại Học Tây Nguyên</p>
-                    </div>
-                </section>
-            </div>
-        </div>
+        <?php include('./src/header.php'); ?>
+        <?php include('./src/banner.html'); ?>
         <div class="main">
             <?php include('./src/navbar.html'); ?>
             <div class="container">

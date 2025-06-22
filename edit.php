@@ -10,7 +10,8 @@ include "./auto_login.php";
 
 $user = autoLogin($conn);
 if ($user['role'] != 'Admin') {
-    exit("Không có quyền truy cập");
+    header("Location: user_edit.php");
+    exit();
 }
 
 $posts_per_page = 10;
@@ -107,6 +108,7 @@ $result = $stmt->get_result();
     </style>
 </head>
 <body>
+    <a href="/"><div><h3>Trang Chủ</h3></div></a>
 <h1>Quản lý bài viết</h1>
 
 <div class="filter-form">
