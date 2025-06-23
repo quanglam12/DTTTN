@@ -142,7 +142,7 @@ $data = fetchNews($conn, $config);
                                 <div class="slide-container">
                                     <div class="slides">
                                         <?php
-                                        if ($user != null && $user['role'] == 'Admin') {
+                                        if ($user != null && ($user['role'] == 'Admin' || $user['role'] == 'Manager')) {
                                             echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
@@ -216,7 +216,7 @@ $data = fetchNews($conn, $config);
                                 </div>
                                 <div class="tab-right">
                                     <?php
-                                    if ($user != null && $user['role'] == 'Admin') {
+                                    if ($user != null && ($user['role'] == 'Admin' || $user['role'] == 'Manager')) {
                                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
@@ -262,7 +262,7 @@ $data = fetchNews($conn, $config);
                                 </div>
                                 <div class="tab-right">
                                     <?php
-                                    if ($user != null && $user['role'] == 'Admin') {
+                                    if ($user != null && ($user['role'] == 'Admin' || $user['role'] == 'Manager')) {
                                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
@@ -307,7 +307,7 @@ $data = fetchNews($conn, $config);
                                 </div>
                                 <div class="tab-right">
                                     <?php
-                                    if ($user != null && $user['role'] == 'Admin') {
+                                    if ($user != null && ($user['role'] == 'Admin' || $user['role'] == 'Manager')) {
                                         echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
@@ -336,7 +336,7 @@ $data = fetchNews($conn, $config);
                     <div class="right-column">
                         <div class="notifications">
                             <?php
-                            if ($user != null && $user['role'] == 'Admin') {
+                            if ($user != null && ($user['role'] == 'Admin' || $user['role'] == 'Manager')) {
                                 echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
@@ -364,7 +364,7 @@ $data = fetchNews($conn, $config);
                         </div>
                         <div class="news">
                             <?php
-                            if ($user != null && $user['role'] == 'Admin') {
+                            if ($user != null && ($user['role'] == 'Admin' || $user['role'] == 'Manager' || $user['role']=='Author')) {
                                 echo '<div class="expand_wrapper">
                                         <button class="expand_option">☰</button>
                                         <div class="expand_dropdown">
@@ -436,7 +436,7 @@ $data = fetchNews($conn, $config);
         <i class="fi fi-sr-arrow-to-top"></i>
     </button>
     <?php
-    if ($user != null && $user['role'] == 'Admin') {
+    if ($user != null && ($user['role'] == 'Admin' || $user['role'] == 'Manager' || $user['role']=='Author')) {
         echo '    <script>
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".expand_option").forEach(button => {

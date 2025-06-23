@@ -5,8 +5,12 @@ include "settings.php";
 $user = autoLogin($conn);
 
 $slug = filter_input(INPUT_GET, 'slug', FILTER_SANITIZE_STRING) ?? "";
-$sql = "SELECT posts.content, posts.title, posts.type, posts.create_at ,fullname FROM posts INNER JOIN user_account ON posts.author_id = user_account.user_id
+$sql = "SELECT posts.content, posts.title, posts.type, posts.create_at, fullname, unit.unit_name 
+        FROM posts 
+        INNER JOIN user_account ON posts.author_id = user_account.user_id
+        INNER JOIN unit ON posts.unit_id = unit.unit_id
         WHERE posts.slug = ? LIMIT 1";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $slug);
 $stmt->execute();
@@ -170,13 +174,19 @@ $data = fetchNews($conn, $config);
                                 echo "Xảy ra lỗi";
                             }
                             ?></p>
-                            <p class="author"><?php
-                            if (isset($row['fullname'])) {
-                                echo $row['fullname'];
-                            } else {
-                                echo "Xảy ra lỗi";
-                            }
-                            ?></p>
+                            <p class="author">
+                                <?php
+                                if (isset($row['fullname'])) {
+                                    echo $row['fullname'];
+                                    if (isset($row['unit_name'])) {
+                                        echo " - " . $row['unit_name'];
+                                    }
+                                } else {
+                                    echo "Xảy ra lỗi";
+                                }
+                                ?>
+                            </p>
+
                             <div class="detail-content">
                                 <div class="chitietbaiviet" id="chitietbaiviet">
 

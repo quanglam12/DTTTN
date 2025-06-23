@@ -173,8 +173,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </select>
                         </label>
 
-                        <label>Mật khẩu mới (bỏ trống nếu không đổi):
-                            <input type="password" name="password">
+                        <label>Mật khẩu mới (bỏ trống nếu không muốn đổi):
+                            <input type="password" name="password" placeholder="Để trống nếu không đổi mật khẩu">
                         </label>
 
                         <button type="submit">Lưu thay đổi</button>
