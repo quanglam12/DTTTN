@@ -22,8 +22,8 @@
                         ?>
                         <?php
                         if ($user != null && $user['role'] != 'User') {
-                            echo '<a href="/edit.php">Quản lí</a>';
-                            echo '<a href="/edit_profile.php">Tài khoản</a>';
+                            echo '<a href="/admin">Quản lí</a>';
+                            echo '<a href="/taikhoan">Tài khoản</a>';
                         }
                         ?>
                         <div class="search-box">

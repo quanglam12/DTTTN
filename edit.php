@@ -9,7 +9,7 @@ require "../config/db_connect.php";
 include "./auto_login.php";
 
 $user = autoLogin($conn);
-if ($user['role'] != 'Admin') {
+if ($user['role'] != 'Admin' || $user['role'] != 'Manager') {
     header("Location: user_edit.php");
     exit();
 }
