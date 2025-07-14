@@ -15,7 +15,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $url = $data['url'] ?? '';
 
 if ($url) {
-    $uploadDir = 'uploads/';
+    $uploadDir = 'uploads/images/';
     if (!file_exists($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }

@@ -348,13 +348,14 @@ $data = fetchNews($conn, $config);
                                     },
 
                                     marker: Marker,
-                                    onChange: async () => {
+                                    
+                                },
+                                onChange: async () => {
                                         isSaved = false;
                                         toggleExitWarning(true);
                                         await checkNewFileBlocks();
 
                                     },
-                                }
                             });
 
                             // Xử lý khi nhấn nút Cập nhật
