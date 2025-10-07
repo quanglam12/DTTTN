@@ -1,0 +1,31 @@
+RewriteEngine On
+RewriteBase /
+
+# /trangchu gọi /index.php
+RewriteRule ^trangchu$ index.php [L]
+# /aboutttn gọi /aboutttn.php
+RewriteRule ^aboutttn$ aboutttn.php [L]
+
+# /vietbai/... gọi /server/post.php?type=...
+RewriteRule ^vietbai/tintucchung$ server/post.php?type=1 [L]
+RewriteRule ^vietbai/thongbao$ server/post.php?type=2 [L]
+RewriteRule ^vietbai/sukien$ server/post.php?type=3 [L]
+RewriteRule ^vietbai/tinnoibat$ server/post.php?type=4 [L]
+RewriteRule ^vietbai/lichtuan$ server/post.php?type=5 [L]
+RewriteRule ^vietbai/thidua$ server/post.php?type=6 [L]
+RewriteRule ^vietbai/doanvien$ server/post.php?type=7 [L]
+
+# /quanli/chinhsua-"số" gọi /server/edit_post.php?id="số"
+RewriteRule ^quanli/chinhsua-([0-9]+)$ server/edit_post.php?id=$1 [L]
+
+# /baiviet/"slug-bai-viet" gọi /news.php?slug="slug-bai-viet"
+RewriteRule ^baiviet/([^/]+)/?$ news.php?slug=$1 [L]
+
+# /tintucchung,... gọi /general.php?type=...
+RewriteRule ^tintucchung$ general.php?type=1 [L]
+RewriteRule ^thongbao$ general.php?type=2 [L]
+RewriteRule ^sukien$ general.php?type=3 [L]
+RewriteRule ^tinnoibat$ general.php?type=4 [L]
+RewriteRule ^lichtuan$ general.php?type=5 [L]
+RewriteRule ^thidua$ general.php?type=6 [L]
+RewriteRule ^doanvien$ general.php?type=7 [L]
