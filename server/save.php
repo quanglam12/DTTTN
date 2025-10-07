@@ -157,7 +157,7 @@ foreach ($content['blocks'] as &$block) {
     }
 }
 if ($urlImg == null) {
-    $urlImg = $Domain . 'server/' . $savedDir . 'default.jpg';
+    $urlImg = $Domain . 'server/' . $imageDir . 'default.jpg';
 }
 if (isset($data['status']) && $data['status'] == "Writing") {
     $status = "Writing";
