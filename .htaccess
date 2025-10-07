@@ -6,7 +6,7 @@ RewriteRule ^trangchu$ index.php [L]
 # /aboutttn gọi /aboutttn.php
 RewriteRule ^aboutttn$ aboutttn.php [L]
 # /admin gọi /edit.php
-RewriteRule ^admin$ edit.php [L]0
+RewriteRule ^admin$ edit.php [L]
 
 # /vietbai/... gọi /server/post.php?type=...
 RewriteRule ^vietbai/tintucchung$ server/post.php?type=1 [L]
