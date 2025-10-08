@@ -21,6 +21,158 @@ if ($user) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập</title>
     <link rel="icon" href="./logo.ico" type="image/x-icon">
+    <style>
+ /* --- Reset & cơ bản --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Thanh toolbar / header */
+.toolbar {
+    background-color: #d32f2f;  /* đỏ đậm */
+    padding: 10px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+}
+
+.toolbar .logo {
+    height: 45px;
+    transition: transform 0.2s;
+}
+
+.toolbar .logo:hover {
+    transform: scale(1.1);
+}
+
+/* Container chính */
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hộp form đăng nhập */
+.login-form {
+    background-color: #ffffff;
+    border: 2px solid #c62828;  /* viền đỏ trung bình */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+/* Tiêu đề form */
+.login-form h2 {
+    color: #d32f2f;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+/* Input */
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+
+.login-form input[type="text"]:focus,
+.login-form input[type="password"]:focus {
+    border-color: #d32f2f;
+    outline: none;
+}
+
+/* Label & checkbox */
+.login-form label {
+    display: block;
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.login-form label input[type="checkbox"] {
+    margin-right: 6px;
+}
+
+/* Nút đăng nhập */
+.login-form button {
+    background-color: #388e3c; /* xanh lá đậm – biểu tượng tuổi trẻ, cây xanh */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.login-form button:hover {
+    background-color: #2e7d32;
+}
+
+.login-form button:active {
+    transform: scale(0.98);
+}
+
+/* Thông báo lỗi / thành công */
+.message {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.error {
+    color: #c62828;
+}
+
+.success {
+    color: #2e7d32;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.login-form {
+    animation: fadeInUp 0.6s ease;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-form {
+        padding: 30px 20px;
+        width: 90%;
+    }
+}
+
+    </style>
 </head>
 
 <div class="toolbar">
