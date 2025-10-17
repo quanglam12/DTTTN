@@ -106,3 +106,39 @@
         display: none;
     }
 }
+.attachment {
+    margin: 5px 0;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+}
+
+.attachment-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.attachment-link:hover {
+    text-decoration: underline;
+}
+
+.attachment-info {
+    color: #666;
+    font-size: 12px;
+    margin: 2px 0 0 0;
+}
+
+.file-icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 4px;
+    vertical-align: middle;
+    border-radius: 0%;
+}

@@ -1,30 +1,39 @@
-@media (max-width: 1024px) {
-    .taskbar {
-        padding: 1rem;
-    }
-}
-
 @media (max-width: 768px) {
+    html{
+        font-size: 56%;
+    }
 
+    h2 {
+        font-size: 1.3rem !important;
+    }
     /*Taskbar*/
     .taskbar {
         flex-direction: column;
         text-align: center;
+        padding-bottom: 0rem;
     }
-
+    .banner-text {
+        font-size: 1.5rem;
+    }
     .taskbar .left,
     .taskbar .right {
         width: 100%;
         justify-content: center;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0rem;
     }
-
+    .taskbar .right a {
+        border-bottom:1.2px solid #02173f;
+        padding-left: 0.2rem;
+        padding-right: 0.2rem;
+    }
     .taskbar nav {
         flex-direction: column;
         gap: 0.5rem;
     }
 
-
+    .search-box {
+        padding: 0;
+    }
     /*Navbar*/
     .navbar-container {
         padding: 0.2rem !important;
@@ -32,6 +41,7 @@
 
     .navbar .menu {
         max-height: 0;
+        gap:0rem;
         opacity: 0;
         display: flex;
         background-color: #0044cc;
@@ -69,7 +79,7 @@
         position: static;
         max-height: 0;
         opacity: 0;
-        flex-direction: column;
+        padding: 0rem;
     }
 
     .dropdown.active .dropdown-menu {
@@ -81,7 +91,9 @@
 
 @media (max-width: 480px) {
     html {
-        font-size: 14px;
+        html{
+            font-size: 56.25%;
+        }
     }
 
     .taskbar {
