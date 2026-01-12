@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
 
 <div class="toolbar">
     <a href="Home.php">
-        <img src="./logo.ico" alt="Logo" class="logo">
+        <img src="./img/logo/doan.ico" alt="Logo" class="logo">
     </a>
 </div>
 
