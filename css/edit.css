@@ -1,0 +1,184 @@
+
+/* --- Cấu hình chung --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9; /* Màu nền xám nhẹ dịu mắt */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 24px;
+    border-bottom: 3px solid #3498db;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #3498db;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #1d6fa5;
+}
+
+/* --- Nút Trang chủ --- */
+a[href="/"] div h3 {
+    margin: 0 0 20px 0;
+    color: #555;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+}
+a[href="/"] div h3:before {
+    content: "← ";
+    margin-right: 5px;
+}
+
+/* --- Form Lọc (Filter) --- */
+.filter-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-form select, 
+.filter-form input[type="text"], 
+.filter-form input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+.filter-form select:focus, 
+.filter-form input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* --- Nút bấm (Button) --- */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* --- Bảng dữ liệu (Table) --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden; /* Bo góc cho bảng */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+thead {
+    background-color: #34495e;
+    color: #ffffff;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Cột thao tác */
+td a {
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+/* Nút Xóa màu đỏ */
+td a[onclick] {
+    color: #e74c3c;
+}
+td a[onclick]:hover {
+    color: #c0392b;
+}
+
+/* --- Bulk Actions (Hành động hàng loạt) --- */
+#posts-form > div {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* --- Phân trang (Pagination) --- */
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background-color: #e9ecef;
+    border-color: #ddd;
+    color: #333;
+}
+
+/* Style cho trang hiện tại (Dựa vào style inline bold trong code PHP của bạn) */
+.pagination a[style*="font-weight:bold"] {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+/* --- Checkbox --- */
+input[type="checkbox"] {
+    transform: scale(1.2);
+    cursor: pointer;
+}

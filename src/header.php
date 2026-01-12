@@ -5,7 +5,10 @@
                 <div class="left">
                     <div class="logo">
                         <a href="/">
-                            <img src="/logo.ico" alt="Logo">
+                            <img src="/img/logo/doan.ico" alt="Đoàn">
+                        </a>
+                        <a href="/">
+                            <img src="/img/logo/truong.ico" alt="Trường">
                         </a>
                         <p> Cổng thông tin điện tử</p>
                     </div>
