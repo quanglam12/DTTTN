@@ -6,6 +6,24 @@
     h2 {
         font-size: 1.3rem !important;
     }
+    .taskbar .logo {
+        flex-wrap: wrap;      
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .taskbar .logo p {
+        width: 100%;  
+        text-align: center; 
+        margin-top: 5px; 
+        margin-bottom: 10px;
+        font-size: 1rem; 
+    }
+
+    .taskbar .logo img {
+        height: 40px;
+        width: auto;
+    }
     /*Taskbar*/
     .taskbar {
         flex-direction: column;
@@ -98,7 +116,24 @@
             font-size: 56.25%;
         }
     }
+.taskbar .logo {
+        flex-wrap: wrap;  
+        justify-content: center; 
+        gap: 0.5rem;  
+    }
 
+    .taskbar .logo p {
+        width: 100%;    
+        text-align: center;  
+        margin-top: 5px;   
+        margin-bottom: 10px;
+        font-size: 1rem;  
+    }
+    
+    .taskbar .logo img {
+        height: 30px;   
+        width: auto;
+    }
     .taskbar {
         padding: 0.75rem;
     }
