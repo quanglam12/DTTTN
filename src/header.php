@@ -10,6 +10,9 @@
                         <a href="/">
                             <img src="/img/logo/truong.ico" alt="Trường">
                         </a>
+                         <a href="/">
+                            <img src="/img/logo/hoi.ico" alt="Hội">
+                        </a>
                         <p> Cổng thông tin điện tử</p>
                     </div>
                 </div>
