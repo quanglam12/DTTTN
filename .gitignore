@@ -2,3 +2,4 @@ server/files/
 server/images/
 server/uploads/
 .htaccess
+sql/

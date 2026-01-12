@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 @font-face {
     font-family: 'SVN-Avo';
     src: url('/src/fonts/SVN-Avo.ttf') format('truetype');
@@ -70,14 +72,14 @@ body {
 }
 
 .taskbar .logo img {
-    width: 50px;
-    height: 50px;
+    cursor: pointer;
 }
+
 .taskbar .logo p {
     font-family: 'SVN-Avo', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 900;
-    color:#4dc63d;
+    color: #4dc63d;
     margin: 0;
 }
 
@@ -140,6 +142,7 @@ body {
     text-transform: uppercase;
     z-index: 1;
 }
+
 .banner-text p:first-child {
     font-family: 'SVN-Avo', sans-serif;
     font-size: 2rem;
@@ -148,6 +151,7 @@ body {
     text-shadow: 1px 1px 0 #fff, -1px 1px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff;
     margin: 0.5rem 0;
 }
+
 .banner-text p:last-child {
     font-family: 'SVN-Avo', sans-serif;
     font-size: 2rem;
@@ -732,6 +736,7 @@ footer {
 .back-to-top:hover {
     background: #0033a0;
 }
+
 #DevName {
     font-family: 'Marck Script', cursive;
     font-size: 1.2rem;
