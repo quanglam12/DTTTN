@@ -13,8 +13,10 @@
         padding-bottom: 0rem;
     }
     .banner-text {
-        margin-left: 1.5rem;
-        font-size: 1.5rem;
+        margin-left: 12rem;
+        margin-right:12rem;
+        font-size: 1.2rem;
+
     }
     .taskbar .left,
     .taskbar .right {
@@ -106,7 +108,16 @@
     }
 
     .banner-text {
+        margin-left: 12rem;
+        margin-right: 12rem;
         font-size: 1.5rem;
+
+    }
+    .banner-text p:first-child {
+    font-size: 1.75rem;
+    }
+    .banner-text p:last-child {
+    font-size: 1.75rem;
     }
 }
 
@@ -150,5 +161,14 @@
 
     footer {
         order: 3;
+    }
+        .banner-text {
+        font-size: 2.5rem;
+    }
+    .banner-text p:first-child {
+    font-size: 2.5rem;
+    }
+    .banner-text p:last-child {
+    font-size: 2.5rem;
     }
 }

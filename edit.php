@@ -71,7 +71,7 @@ $where_conditions = "1=1";
 $params = array();
 
 $status_raw = filter_input(INPUT_GET, 'status', FILTER_SANITIZE_STRING);
-$status = isset($status_raw) ? $status_raw : ''; // Mặc định để trống để xem tất cả hoặc set 'Pending' tùy logic bạn
+$status = is_null($status_raw) ? 'Pending' : $status_raw;
 
 if (!empty($status)) {
     $where_conditions .= " AND p.status = ?";
