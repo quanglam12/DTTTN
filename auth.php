@@ -176,7 +176,7 @@ body {
 </head>
 
 <div class="toolbar">
-    <a href="Home.php">
+    <a href="/">
         <img src="./logo.ico" alt="Logo" class="logo">
     </a>
 </div>
